@@ -13,6 +13,17 @@
                 <li><a href="?router=Site/relatorios/" class="nav-link" style="border-bottom-right-radius: 40px; border-top-right-radius: 40px;">Relatórios</a></li>
             </ul>
         </div>
-        <a href="?router=Site/login/" class="btnAcessar">Sair</a>
+        <?php if($_SESSION["usuario"]["id"]){?>
+
+            <div class="notification is-success">
+                <p>Olá <strong><?php echo $_SESSION["usuario"]["razao_social"];?></strong></p>
+            </div>
+
+
+
+            <a href="?router=Site/logout/" class="btnAcessar">Sair</a>
+
+        <?php }?>
+
     </nav>
 </header>

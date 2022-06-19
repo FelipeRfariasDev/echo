@@ -1,5 +1,5 @@
 <?php include("header.php");?>
-<?php include("Element/nav-menu.php");?>
+<?php include("Element/nav-menu-autenticado.php");?>
     <!--================== CONTAINER ==================-->
     <div class="container-principal">
         <div class="card-principal">

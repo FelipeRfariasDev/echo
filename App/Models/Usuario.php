@@ -7,24 +7,21 @@ class Usuario extends Connection{
     public function novo()
     {
         if ($_POST) {
-            print_r($_POST);
-            exit;
             try {
-                $usuario = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_SPECIAL_CHARS);
-                $senha = md5(filter_input(INPUT_POST, 'senha', FILTER_DEFAULT));
-                $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-                $sexo = filter_input(INPUT_POST, 'sexo', FILTER_DEFAULT);
-                $data = filter_input(INPUT_POST, 'data', FILTER_DEFAULT);
+                $cnpj = $_POST["cnpj"];
+                $razao_social = $_POST["razao_social"];
+                $email = $_POST["email"];
+                $senha = md5($_POST["senha"]);
 
                 $conn = $this->connect();
-                $sql = "insert into tb_pessoa values(default, :usuario, :senha, :email, :sexo, :data_nascimento)";
+
+                $sql = "insert into usuario values(default, :cnpj, :razao_social, :email, :senha)";
 
                 $stmt = $conn->prepare($sql);
-                $stmt->bindParam(':usuario', $usuario);
-                $stmt->bindParam(':senha', $senha);
+                $stmt->bindParam(':cnpj', $cnpj);
+                $stmt->bindParam(':razao_social', $razao_social);
                 $stmt->bindParam(':email', $email);
-                $stmt->bindParam(':sexo', $sexo);
-                $stmt->bindParam(':data_nascimento', $data);
+                $stmt->bindParam(':senha', $senha);
                 $stmt->execute();
 
                 return true;
@@ -37,23 +34,19 @@ class Usuario extends Connection{
 
     public function login()
     {
-        return true;
-        $email = filter_input(INPUT_GET, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
-        $senha = md5(filter_input(INPUT_GET, 'senha', FILTER_DEFAULT));
+        $email = $_POST["email"];
+        $senha = md5($_POST["senha"]);
 
         $conn = $this->connect();
-        $sql = "select usuario from tb_pessoa where email = :email and senha = md5(:senha)";
+        $sql = "select id,cnpj,razao_social,email from usuario where email = :email and senha = (:senha)";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':senha', $senha);
         $stmt->execute();
-
-        $result = $stmt->fetchAll();
-        $rowcount = count($result);
-
-        if ($rowcount == 1) {
-            return true;
+        $result = $stmt->fetch();
+        if ($result == true) {
+            return $result;
         }else{
             return false;
         }

@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                             <div class="buttonlogin">
-                                <button type="submit" class="btnlogin">Iniciar sessão</button>
+                                <input type="submit" class="btnlogin">Iniciar sessão</input>
                                 <p>Problemas para entrar na sua conta? Certifique que seu navegador está com Javascript e cookies habilitados.</p>
                             </div>
                         </div>
