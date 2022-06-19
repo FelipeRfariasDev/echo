@@ -1,0 +1,106 @@
+.container-carbono{
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    height:80vh;
+    align-items: center;
+    justify-content: space-around;
+
+
+    @include smartphone(){
+        flex-direction: column;
+        margin-top: 10vh;
+    }
+}
+
+
+.container-item-carbono{
+    max-width: 580px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+
+    h1{
+        font-size: 72px;
+        padding-bottom: 32px;
+        color: $green;
+    }
+
+    p{
+        font-size: 36px;
+        color: $green;
+        text-align: justify;
+
+        @include responsivefix(){
+            font-size: 24px;
+            margin-left: 4vw;
+        }
+
+        @include smartphone(){
+            font-size: 32px;
+        }
+
+        @include smartphone375(){
+            font-size: 30px;
+        }
+
+        @include smartphone360(){
+            font-size: 28px;
+        }
+    }
+
+
+
+    @include smartphoneS(){
+        margin-top: 40vh;
+    }
+
+    @include smartphone(){
+        p{
+            margin-top: 10vh;
+            text-align: center;
+        }
+    }
+
+    @include smartphone360(){
+        margin-top: 60vh;
+    }
+}
+
+
+.lottie-carb-one{
+    @include tabletS(){
+        display: none;
+    }
+}
+
+.lottie-carb-two{
+    display: none;
+    @include tabletS(){
+        display: block;
+    }
+}
+
+
+.wavecarbono{
+    position: fixed;
+    bottom: -90px;
+
+    @include smartphone{
+        position: inherit;
+    }
+
+    @include smartphoneS(){
+        margin-top: 40vh;
+    }
+
+    @include smartphoneFold(){
+        margin-top: 50vh;
+    }
+
+    @include smartphone360(){
+        margin-top: 65vh;
+    }
+}

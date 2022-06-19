@@ -1,0 +1,22 @@
+{
+    "name": "luandias/echomvc",
+    "description": "(ECHO MVC) Registro de uso de veículos por empresa",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Luandias\\Echomvc\\": "public/",
+            "App\\" : "App\\",
+            "Core\\" : "Core\\"
+        }
+    },   
+    "authors": [
+        {
+            "name": "Luan",
+            "email": "luoliveidias@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php" : "7.3.33"
+    }
+}

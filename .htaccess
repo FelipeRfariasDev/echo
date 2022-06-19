@@ -1,0 +1,11 @@
+RewriteEngine on
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-l
+
+RewriteRule ^(.*)$ index.php?router=$1 [QSA,L]
+
+#desabilitaralistagem de pasta do servidor.
+
+options -Indexes
+

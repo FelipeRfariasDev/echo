@@ -1,0 +1,50 @@
+.inputs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+
+    label{
+        margin-left: 10px;
+    }
+}
+
+
+.btncrud{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+
+    button{
+        margin: 30px;
+        width: 100px;
+        height: 40px;
+    }
+}
+
+
+table{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    border: 1px solid black;
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+
+    
+    th{
+        border: 1px solid black;
+        padding: 10px;
+    }
+    
+    td{
+        padding: 10px;
+    }
+}
+
+
+.spacing{
+    margin-left: 10px;
+}
