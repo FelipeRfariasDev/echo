@@ -9,3 +9,7 @@ RewriteRule ^(.*)$ index.php?router=$1 [QSA,L]
 
 options -Indexes
 
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
