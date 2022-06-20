@@ -55,7 +55,6 @@ if (@$_SESSION["msgVeiculoRemovidoSucesso"]==true) {
 <?php if(!empty($_SESSION["getVeiculos"])){?>
 <table style="float: left">
     <tr>
-        <td>Id</td>
         <td>Placa</td>
         <td>Marca</td>
         <td>Autonomia</td>
@@ -63,7 +62,6 @@ if (@$_SESSION["msgVeiculoRemovidoSucesso"]==true) {
     <?php
     foreach($_SESSION["getVeiculos"] as $getVeiculo):?>
     <tr>
-        <td><?php echo $getVeiculo["id"];?></td>
         <td><?php echo $getVeiculo["placa"];?></td>
         <td><?php echo $getVeiculo["marca"];?></td>
         <td><?php echo $getVeiculo["autonomia"];?></td>
