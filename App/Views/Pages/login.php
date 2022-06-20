@@ -7,14 +7,14 @@
                 <?php
                 if ( !empty($_SESSION["cadastroSuccess"]) &&  $_SESSION["cadastroSuccess"]==true) {
                 ?>
-                    <div class="notification is-success">
+                    <div class="notification is-success" style="color: #ffffff;text-decoration-line: underline;background-color: #6d985d;">
                         <p>Cadastro realizado com sucesso!</p>
                     </div>
                 <?php
                     $_SESSION["cadastroSuccess"]=false;
                 }
                 ?>
-                <form action="?router=Usuarios/novo" method="POST">
+                <form action="/Usuarios/novo" method="POST">
                     <input type="hidden" value="novo" name="tiporequisicao">
                     <div class="format">
                         <div class="first-row">
@@ -42,12 +42,12 @@
 
                     <div class="button">
                         <button type="submit" class="btncadastro">Cadastre-se já</button>
-                        <p>Ao criar uma conta, você declara que possui mais de 16 anos de idade e está de acordo com os <a href="#" style="color: blue;">Termos de Serviço</a> & <a href="#" style="color: blue;">Política de Privacidade</a>.</p>
+                        <p>Ao criar uma conta, você declara que possui mais de 16 anos de idade e está de acordo com os <a href="/#" style="color: blue;">Termos de Serviço</a> & <a href="/#" style="color: blue;">Política de Privacidade</a>.</p>
                     </div>
             </div>
             </form>
 
-            <form action="?router=Usuarios/login" method="POST">
+            <form action="/Usuarios/login" method="POST">
                 <input type="hidden" value="login" name="tiporequisicao">
                 <div class="container-login">
                     <div class="linha"></div>
@@ -57,7 +57,10 @@
                         <?php
                         if (!empty($_SESSION["cadastroErros"]) && $_SESSION["cadastroErros"]==true) {
                         ?>
-                            <div class="notification is-success">
+                            <div class="notification is-error" style="color: #af4646;
+    text-decoration-line: underline;
+    font-size: small;
+    font-weight: bolder;">
                                 <p>Email ou senha incorretos!</p>
                             </div>
                         <?php

@@ -4,18 +4,18 @@
     <div class="container-principal">
         <div class="card-principal">
             <div class="card-image">
-                <img src="/echo/public/assets/img/imgveiculo.png">
+                <img src="/public/assets/img/imgveiculo.png">
             </div>
             <h3 class="name">Veiculos</h3>
             <p class="comment">
                 Liste e organize os veículos de sua empresa  
                 com eficácia e de maneira simples.
             </p>
-            <a href="?router=Veiculos/index/" class="btngerenciamento" style="margin-top: 59px;">Gerenciar</a>
+            <a href="/Veiculos/index/" class="btngerenciamento" style="margin-top: 59px;">Gerenciar</a>
         </div>
         <div class="card-principal">
             <div class="card-image">
-                <img src="/echo/public/assets/img/imgfuncionarios.png">
+                <img src="/public/assets/img/imgfuncionarios.png">
             </div>
             <h3 class="name">Funcionarios</h3>
             <p class="comment">
@@ -23,11 +23,11 @@
                 suas frotas de carro, para que sua empresa seja 
                 mais organizada.
             </p>
-            <a href="?router=Site/funcionarios/" class="btngerenciamento">Gerenciar</a>
+            <a href="/Site/funcionarios/" class="btngerenciamento">Gerenciar</a>
         </div>
         <div class="card-principal">
             <div class="card-image">
-                <img src="/echo/public/assets/img/imgchamados.png">
+                <img src="/public/assets/img/imgchamados.png">
             </div>
             <h3 class="name">Chamados</h3>
             <p class="comment">
@@ -35,7 +35,7 @@
                 veículo, para que assim sua empresa tenha total controle 
                 administrativo.
             </p>
-            <a href="?router=Site/chamados/" class="btngerenciamento">Gerenciar</a>
+            <a href="/Site/chamados/" class="btngerenciamento">Gerenciar</a>
         </div>
     </div>
 

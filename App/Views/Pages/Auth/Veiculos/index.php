@@ -1,9 +1,9 @@
 <?php
-include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/header.php");
-include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/Element/nav-menu-autenticado.php");
+include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/header.php");
+include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/Element/nav-menu-autenticado.php");
 ?>
 
-<h1>Buscar Veiculos <a href="?router=Veiculos/novo">(+)</a></h1>
+<h1>Buscar Veiculos <a href="/Veiculos/novo">(+)</a></h1>
 
 <?php
 if (@$_SESSION["msgVeiculoAdicionadoSucesso"]==true) {
@@ -38,7 +38,7 @@ if (@$_SESSION["msgVeiculoRemovidoSucesso"]==true) {
 }
 ?>
 
-<form action="?router=Veiculos/index" method="POST">
+<form action="/Veiculos/index" method="POST">
     <input type="hidden" name="acao" value="buscar">
     <label for="placa">Placa</label>
     <input name="placa" type="text" placeholder="Qual é a placa do Veículo?">
@@ -66,8 +66,8 @@ if (@$_SESSION["msgVeiculoRemovidoSucesso"]==true) {
         <td><?php echo $getVeiculo["marca"];?></td>
         <td><?php echo $getVeiculo["autonomia"];?></td>
         <td>
-            <a href='?router=Veiculos/alterar/&id=<?php echo $getVeiculo["id"];?>'>alterar</a>
-            <a href='?router=Veiculos/excluir/&id=<?php echo $getVeiculo["id"];?>' onclick="javascript:return confirm('Tem certeza que deseja excluir?')">excluir</a>
+            <a href='/Veiculos/alterar/&id=<?php echo $getVeiculo["id"];?>'>alterar</a>
+            <a href='/Veiculos/excluir/&id=<?php echo $getVeiculo["id"];?>' onclick="javascript:return confirm('Tem certeza que deseja excluir?')">excluir</a>
         </td>
     </tr>
     <?php endforeach;
@@ -75,4 +75,4 @@ if (@$_SESSION["msgVeiculoRemovidoSucesso"]==true) {
     ?>
 </table>
 <?php } ?>
-<?php include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/footer.php");?>
+<?php include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/footer.php");?>

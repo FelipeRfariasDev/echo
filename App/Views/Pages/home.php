@@ -10,10 +10,10 @@
             </p>
         </div>
         <div class="container-item-2 z-index">
-            <img src="/echo/public/assets/img/ExemploMenu.png" class="exemplo"/>
+            <img src="/public/assets/img/ExemploMenu.png" class="exemplo"/>
         </div> 
     </section>
-    <img src="/echo/public/assets/svg/Wave.svg" alt="Wave" class="wave">
+    <img src="/public/assets/svg/Wave.svg" alt="Wave" class="wave">
     
     <div class="background">
         <section class="container-2">
@@ -24,7 +24,7 @@
             <div class="container-item-3">
                 <div class="card">
                     <div class="card-image">
-                        <img src="/echo/public/assets/img/imgveiculo.png">
+                        <img src="/public/assets/img/imgveiculo.png">
                     </div>
                     <h3 class="name">Veiculos</h3>
                     <p class="comment">
@@ -34,7 +34,7 @@
                 </div>
                 <div class="card">
                     <div class="card-image">
-                        <img src="/echo/public/assets/img/imgfuncionarios.png">
+                        <img src="/public/assets/img/imgfuncionarios.png">
                     </div>
                     <h3 class="name">Funcionarios</h3>
                     <p class="comment">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="card">
                     <div class="card-image">
-                        <img src="/echo/public/assets/img/imgchamados.png">
+                        <img src="/public/assets/img/imgchamados.png">
                     </div>
                     <h3 class="name">Chamados</h3>
                     <p class="comment">

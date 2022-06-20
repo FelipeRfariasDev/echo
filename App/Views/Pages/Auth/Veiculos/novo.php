@@ -1,11 +1,11 @@
 <?php
-include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/header.php");
-include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/Element/nav-menu-autenticado.php");
+include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/header.php");
+include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/Element/nav-menu-autenticado.php");
 ?>
 
-<h1>Cadastro de Veiculos <a href='?router=Veiculos/index'> < </a></h1>
+<h1>Cadastro de Veiculos <a href='/Veiculos/index'> < </a></h1>
 
-<form action="?router=Veiculos/novo" method="POST">
+<form action="/Veiculos/novo" method="POST">
 
     <label for="placa">Placa</label>
     <input name="placa" type="text" required placeholder="Qual é a placa do Veículo?">
@@ -21,4 +21,4 @@ include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/Element/nav-menu-a
 </form>
 
 
-<?php include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/footer.php");?>
+<?php include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/footer.php");?>

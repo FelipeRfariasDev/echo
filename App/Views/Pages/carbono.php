@@ -11,5 +11,5 @@
             <lottie-player class="lottie-carb-two" src="https://assets6.lottiefiles.com/private_files/lf30_rwpu0mow.json"  background="transparent"  speed="1"  style="width: 400px; height: 400px;"    autoplay></lottie-player>
         </div> 
     </section>
-    <img src="/echo/public/assets/svg/Wave.svg" alt="Wave" class="wavecarbono">
+    <img src="/public/assets/svg/Wave.svg" alt="Wave" class="wavecarbono">
 <?php include("footer.php");?>

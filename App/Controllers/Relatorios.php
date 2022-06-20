@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+session_start();
+
 class Relatorios
 {
     public function index()

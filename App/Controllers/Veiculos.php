@@ -31,7 +31,7 @@ class Veiculos
         $insert = $veiculo->novo();
         if($insert==true){
             $_SESSION["msgVeiculoAdicionadoSucesso"]=true;
-            Header("Location: ?router=Veiculos/index");
+            Header("Location: /Veiculos/index");
         }
         require_once __DIR__ . "/../Views/Pages/Auth/Veiculos/novo.php";
     }
@@ -43,7 +43,7 @@ class Veiculos
             $update = $veiculo->update();
             if($update==true){
                 $_SESSION["msgVeiculoAlteradoSucesso"]=true;
-                Header("Location: ?router=Veiculos/index");
+                Header("Location: /Veiculos/index");
             }
         }
         $veiculo = new Veiculo();
@@ -60,7 +60,7 @@ class Veiculos
             $_SESSION["msgVeiculoRemovidoSucesso"]=true;
             $getVeiculos = $veiculo->index();
             $_SESSION["getVeiculos"]=$getVeiculos;
-            Header("Location: ?router=Veiculos/index");
+            Header("Location: /Veiculos/index");
         }
     }
 }

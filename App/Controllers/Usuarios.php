@@ -17,7 +17,7 @@ class Usuarios
                 if($data!=false){
                     session_id($data['id']);
                     $_SESSION["usuario"]=$data;
-                    Header("Location: ?router=Site/principal/");
+                    Header("Location: /Site/principal/");
                 }else{
                     //erro de login, usuário e senha não encontrado
                     $_SESSION["cadastroErros"]=true;
@@ -34,7 +34,7 @@ class Usuarios
             $novo = $usuario->novo();
             if($novo==true){
                 $_SESSION["cadastroSuccess"]=true;
-
+                Header("Location: /Usuarios/login/");
             }else{
                 echo "erro ao tentar cadastrar o usuário";
                 exit;
@@ -45,6 +45,6 @@ class Usuarios
     public function logout()
     {
         session_destroy();
-        Header("Location: ?router=Usuarios/login/");
+        Header("Location: /Usuarios/login/");
     }
 }
