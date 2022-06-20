@@ -21,3 +21,6 @@ C:\xampp\apache\conf\extra\httpd-vhosts.conf
 ![alt text](https://github.com/FelipeRfariasDev/echo/blob/main/public/assets/img/virtualhost.PNG?raw=true)
 
 Via url http://echo-mvc.com.br/
+
+
+![alt text](https://github.com/FelipeRfariasDev/echo/blob/main/public/assets/img/home.PNG?raw=true)
