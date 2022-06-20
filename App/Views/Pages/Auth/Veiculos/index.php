@@ -41,13 +41,13 @@ if (@$_SESSION["msgVeiculoRemovidoSucesso"]==true) {
 <form action="?router=Veiculos/index" method="POST">
     <input type="hidden" name="acao" value="buscar">
     <label for="placa">Placa</label>
-    <input name="placa" type="text">
+    <input name="placa" type="text" placeholder="Qual é a placa do Veículo?">
 
     <label for="marca">Marca</label>
-    <input name="marca" type="text">
+    <input name="marca" type="text" placeholder="Qual é a marca do Veículo?">
 
     <label for="autonomia">Autonomia</label>
-    <input name="autonomia" type="text">
+    <input name="autonomia" type="text" placeholder="Qual é a autonomia do Veículo?">
 
     <button type="submit" class="">Buscar</button>
 </form>

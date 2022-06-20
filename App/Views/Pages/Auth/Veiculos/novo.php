@@ -8,15 +8,15 @@ include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/Element/nav-menu-a
 <form action="?router=Veiculos/novo" method="POST">
 
     <label for="placa">Placa</label>
-    <input name="placa" type="text" required>
+    <input name="placa" type="text" required placeholder="Qual é a placa do Veículo?">
 
     <label for="marca">Marca</label>
-    <input name="marca" type="text">
+    <input name="marca" type="text" required placeholder="Qual é a marca do Veículo?">
 
     <label for="autonomia">Autonomia</label>
-    <input name="autonomia" type="text">
+    <input name="autonomia" type="text" required placeholder="Qual é a autonomia do Veículo?">
 
-    <button type="submit" class="">Novo</button>
+    <button type="submit" class="">Salvar</button>
 
 </form>
 
