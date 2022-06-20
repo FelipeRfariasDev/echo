@@ -54,16 +54,16 @@ include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/Element/nav-menu-a
 
             </form>
     <br>
+    <?php if(!empty($_SESSION["getVeiculos"])){?>
     <table style="float: left">
-
         <tr>
-            <td>#</td>
-            <td>First</td>
-            <td>Last</td>
-            <td>Handle</td>
+            <td>Id</td>
+            <td>Placa</td>
+            <td>Marca</td>
+            <td>Autonomia</td>
         </tr>
-
-        <?php foreach($_SESSION["getVeiculos"] as $getVeiculo):?>
+        <?php
+        foreach($_SESSION["getVeiculos"] as $getVeiculo):?>
         <tr>
             <td><?php echo $getVeiculo["id"];?></td>
             <td><?php echo $getVeiculo["placa"];?></td>
@@ -74,6 +74,9 @@ include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/Element/nav-menu-a
                 <a href='?router=Site/veiculos/&tiporequisicao=excluir&id=<?php echo $getVeiculo["id"];?>'>excluir</a>
             </td>
         </tr>
-        <?php endforeach;?>
+        <?php endforeach;
+
+        ?>
     </table>
+    <?php } ?>
 <?php include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/footer.php");?>

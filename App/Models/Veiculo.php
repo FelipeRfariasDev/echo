@@ -64,12 +64,14 @@ class Veiculo extends Connection
                 $id = $_POST["id"];
                 $placa = $_POST["placa"];
                 $marca = $_POST["marca"];
-                $conn = $this->connect();
-                $sql = "UPDATE veiculos SET placa = '$placa',marca = '$marca' WHERE (`id` = $id)";
-                $stmt = $conn->prepare($sql);
-                $return = $stmt->execute();
+                $autonomia = $_POST["autonomia"];
 
-                return $return;
+                $conn = $this->connect();
+                $sql = "UPDATE veiculos SET placa = '$placa',marca = '$marca',autonomia='$autonomia' WHERE (`id` = $id)";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+
+                return true;
             } catch (\PDOException $e) {
                 return false;
             }
