@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\Usuario;
 use App\Models\Veiculo;
-use http\Header;
 
 session_start();
 
@@ -109,8 +108,6 @@ class Site
                 }
             }
         }
-
-
         require_once __DIR__ . "/../Views/Pages/Auth/Veiculos/novo.php";
     }
 
@@ -123,6 +120,7 @@ class Site
                 $update = $veiculo->update();
                 if($update==true){
                     $_SESSION["msgVeiculoAlteradoSucesso"]=true;
+                    Header("Location: ?router=Site/veiculos");
                 }
             }
         }

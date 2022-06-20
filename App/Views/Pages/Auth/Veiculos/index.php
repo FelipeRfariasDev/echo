@@ -17,6 +17,17 @@ include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/Element/nav-menu-a
                 ?>
 
                 <?php
+                if (!empty($_SESSION["msgVeiculoAlteradoSucesso"]) && $_SESSION["msgVeiculoAlteradoSucesso"]==true) {
+                    ?>
+                    <div class="notification is-success">
+                        <p>Veículo alterado com sucesso!</p>
+                    </div>
+                    <?php
+                    $_SESSION["msgVeiculoAlteradoSucesso"]=false;
+                }
+                ?>
+
+                <?php
                 if (!empty($_SESSION["msgVeiculoRemovidoSucesso"]) && $_SESSION["msgVeiculoRemovidoSucesso"]==true) {
                     ?>
                     <div class="notification is-success">

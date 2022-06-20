@@ -5,17 +5,6 @@ include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/Element/nav-menu-a
 
             <h1>Veiculos Alterar <a href='?router=Site/veiculos'>< voltar</a></h1>
 
-
-            <?php
-            if (!empty($_SESSION["msgVeiculoAlteradoSucesso"]) && $_SESSION["msgVeiculoAlteradoSucesso"]==true) {
-                ?>
-                <div class="notification is-success">
-                    <p>Veículo alterado com sucesso!</p>
-                </div>
-                <?php
-                $_SESSION["msgVeiculoAlteradoSucesso"]=false;
-            }
-            ?>
             <form action="" method="POST">
                 <input type="hidden" value="update" name="tiporequisicao">
                 <input type="hidden" value="<?php echo $_SESSION["getByIdVeiculo"]["id"];?>" name="id">
