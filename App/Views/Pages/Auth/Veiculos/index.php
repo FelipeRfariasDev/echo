@@ -8,7 +8,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/Element/nav-menu-autent
 <?php
 if (@$_SESSION["msgVeiculoAdicionadoSucesso"]==true) {
     ?>
-    <div class="notification is-success">
+    <div class="notification is-success" style="color: #ffffff;text-decoration-line: underline;background-color: #6d985d;">
         <p>Veículo adicionado com sucesso!</p>
     </div>
     <?php
@@ -19,7 +19,7 @@ if (@$_SESSION["msgVeiculoAdicionadoSucesso"]==true) {
 <?php
 if (@$_SESSION["msgVeiculoAlteradoSucesso"]==true) {
     ?>
-    <div class="notification is-success">
+    <div class="notification is-success" style="color: #ffffff;text-decoration-line: underline;background-color: #6d985d;">
         <p>Veículo alterado com sucesso!</p>
     </div>
     <?php
@@ -30,7 +30,7 @@ if (@$_SESSION["msgVeiculoAlteradoSucesso"]==true) {
 <?php
 if (@$_SESSION["msgVeiculoRemovidoSucesso"]==true) {
     ?>
-    <div class="notification is-success">
+    <div class="notification is-success" style="color: #ffffff;text-decoration-line: underline;background-color: #6d985d;">
         <p>Veículo excluído com sucesso!</p>
     </div>
     <?php
@@ -74,5 +74,7 @@ if (@$_SESSION["msgVeiculoRemovidoSucesso"]==true) {
 
     ?>
 </table>
-<?php } ?>
+<?php }else{ ?>
+    Resultado da busca: Nenhum veiculo cadastrado
+<?php }?>
 <?php include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/footer.php");?>

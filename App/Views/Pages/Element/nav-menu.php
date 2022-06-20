@@ -12,7 +12,8 @@
 
             $nome_controller = $url[1];
             if(empty($nome_controller)) $nome_controller = "Site";
-            $nome_action = $url[2];
+            if(!empty($url[2])) $nome_action = $url[2];
+
             if(empty($nome_action)) $nome_action = "home";
 
             ?>

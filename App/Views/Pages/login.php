@@ -57,10 +57,7 @@
                         <?php
                         if (!empty($_SESSION["cadastroErros"]) && $_SESSION["cadastroErros"]==true) {
                         ?>
-                            <div class="notification is-error" style="color: #af4646;
-    text-decoration-line: underline;
-    font-size: small;
-    font-weight: bolder;">
+                            <div class="notification is-error" style="color: #af4646;text-decoration-line: underline;font-size: small;font-weight: bolder;">
                                 <p>Email ou senha incorretos!</p>
                             </div>
                         <?php
