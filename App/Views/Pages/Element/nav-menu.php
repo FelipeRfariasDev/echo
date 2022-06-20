@@ -2,7 +2,7 @@
     <nav class="navbar">
         <div class="nav-menu">
             <div class="logo">
-                <a href="?router=Site/home/"><img src="/echo/public/assets/svg/Logo.svg" alt="Echo"></a>
+                <a href="?router=Site/home/"><img src="/echo/public/assets/svg/Logo.svg" style="width: 150px;margin-left: 100%;" alt="Echo"></a>
             </div>
             <div class="burger"><img src="/echo/public/assets/svg/burg.svg"></div>
             <ul class="nav-list">
