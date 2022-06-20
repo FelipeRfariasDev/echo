@@ -4,10 +4,28 @@ namespace App\Models;
 
 class Veiculo extends Connection
 {
-    public function index()
+    public function index($placa,$marca,$autonomia)
     {
         $conn = $this->connect();
         $sql = "select * from veiculos";
+
+        if(!empty($placa)){
+            $wherePlaca=["placa='$placa'"];
+        }
+        if(!empty($marca)){
+            $whereMarca=["marca='$marca'"];
+        }
+        if(!empty($autonomia)){
+            $whereAutonomia=["autonomia='$autonomia'"];
+        }
+        if(!empty($wherePlaca) || !empty($whereMarca) || !empty($whereAutonomia)){
+            $where = [];
+            if(!empty($wherePlaca))         $where[]= implode("",$wherePlaca);
+            if(!empty($whereMarca))         $where[]= implode("",$whereMarca);
+            if(!empty($whereAutonomia))     $where[]= implode("",$whereAutonomia);
+            $where = implode(" OR ",$where);
+            $sql = $sql . " WHERE ".$where;
+        }
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -18,12 +36,11 @@ class Veiculo extends Connection
         }
     }
 
-    public function insert()
+    public function novo()
     {
         //$sql = "INSERT INTO `veiculos` (`id`, `placa`, `marca`, `autonomia`) VALUES (NULL, 'MER-1839', 'Maserati', '60')";
         //$sql = "INSERT INTO `veiculos` (`id`, `placa`, `marca`, `autonomia`) VALUES (NULL, 'HOX-7464', 'GREAT WALL', '60')";
         //$sql = "INSERT INTO `veiculos` (`id`, `placa`, `marca`, `autonomia`) VALUES (NULL, 'JUN-7472', 'AM Gen', '55')";
-
 
         if ($_POST) {
             try {

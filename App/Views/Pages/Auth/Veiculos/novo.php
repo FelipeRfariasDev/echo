@@ -3,25 +3,22 @@ include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/header.php");
 include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/Element/nav-menu-autenticado.php");
 ?>
 
-            <h1>Veiculos Novo <a href='?router=Site/veiculos'>< voltar</a></h1>
+<h1>Veiculos Novo <a href='?router=Veiculos/index'>< voltar</a></h1>
 
+<form action="?router=Veiculos/novo" method="POST">
 
+    <label for="placa">placa</label>
+    <input name="placa" type="text" required>
 
-            <form action="" method="POST">
-                <input type="hidden" value="novo" name="tiporequisicao">
+    <label for="marca">marca</label>
+    <input name="marca" type="text">
 
-                <label for="placa">placa</label>
-                <input name="placa" type="text">
+    <label for="autonomia">autonomia</label>
+    <input name="autonomia" type="text">
 
-                <label for="marca">marca</label>
-                <input name="marca" type="text">
+    <button type="submit" class="">Novo</button>
 
-                <label for="autonomia">autonomia</label>
-                <input name="autonomia" type="text">
-
-                <button type="submit" class="">Novo</button>
-
-            </form>
+</form>
 
 
 <?php include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/footer.php");?>

@@ -11,7 +11,7 @@
                 Liste e organize os veículos de sua empresa  
                 com eficácia e de maneira simples.
             </p>
-            <a href="?router=Site/veiculos/" class="btngerenciamento" style="margin-top: 59px;">Gerenciar</a>
+            <a href="?router=Veiculos/index/" class="btngerenciamento" style="margin-top: 59px;">Gerenciar</a>
         </div>
         <div class="card-principal">
             <div class="card-image">

@@ -1,5 +1,5 @@
 <?php include("header.php");?>
-<?php include("Element/nav-menu.php");?>
+<?php include("Element/nav-menu-login.php");?>
     <section class="container">
             <div class="container-left">
                 <h1>Registre-se Gratuitamente</h1>
@@ -14,7 +14,7 @@
                     $_SESSION["cadastroSuccess"]=false;
                 }
                 ?>
-                <form action="" method="POST">
+                <form action="?router=Usuarios/novo" method="POST">
                     <input type="hidden" value="novo" name="tiporequisicao">
                     <div class="format">
                         <div class="first-row">
@@ -47,7 +47,7 @@
             </div>
             </form>
 
-            <form action="" method="POST">
+            <form action="?router=Usuarios/login" method="POST">
                 <input type="hidden" value="login" name="tiporequisicao">
                 <div class="container-login">
                     <div class="linha"></div>
@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                             <div class="buttonlogin">
-                                <input type="submit" class="btnlogin">Iniciar sessão</input>
+                                <input type="submit" class="btnlogin" style="color: #ffffff!important;" value="Iniciar sessão" />
                                 <p>Problemas para entrar na sua conta? Certifique que seu navegador está com Javascript e cookies habilitados.</p>
                             </div>
                         </div>
