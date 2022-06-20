@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Veiculo extends Connection
 {
-    public function index($placa,$marca,$autonomia)
+    public function index($placa=null,$marca=null,$autonomia=null)
     {
         $conn = $this->connect();
         $sql = "select * from veiculos";

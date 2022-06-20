@@ -69,7 +69,7 @@ if (@$_SESSION["msgVeiculoRemovidoSucesso"]==true) {
         <td><?php echo $getVeiculo["autonomia"];?></td>
         <td>
             <a href='?router=Veiculos/alterar/&id=<?php echo $getVeiculo["id"];?>'>alterar</a>
-            <a href='?router=Veiculos/excluir/&id=<?php echo $getVeiculo["id"];?>'>excluir</a>
+            <a href='?router=Veiculos/excluir/&id=<?php echo $getVeiculo["id"];?>' onclick="javascript:return confirm('Tem certeza que deseja excluir?')">excluir</a>
         </td>
     </tr>
     <?php endforeach;
