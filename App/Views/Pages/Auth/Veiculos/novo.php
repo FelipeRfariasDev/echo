@@ -3,7 +3,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/header.php");
 include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/Element/nav-menu-autenticado.php");
 ?>
 
-<h1>Veiculos Novo <a href='?router=Veiculos/index'>< voltar</a></h1>
+<h1>Cadastro de Veiculos <a href='?router=Veiculos/index'> < </a></h1>
 
 <form action="?router=Veiculos/novo" method="POST">
 

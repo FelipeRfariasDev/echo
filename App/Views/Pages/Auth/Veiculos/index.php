@@ -3,7 +3,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/header.php");
 include($_SERVER["DOCUMENT_ROOT"]."/echo/App/Views/Pages/Auth/Element/nav-menu-autenticado.php");
 ?>
 
-<h1>Veiculos <a href="?router=Veiculos/novo">(novo+)</a></h1>
+<h1>Buscar Veiculos <a href="?router=Veiculos/novo">(+)</a></h1>
 
 <?php
 if (@$_SESSION["msgVeiculoAdicionadoSucesso"]==true) {
