@@ -20,7 +20,7 @@
                         <div class="first-row">
                             <div class="column">
                                 <label for="cnpj">CNPJ</label>
-                                <input name="cnpj" type="text" required>
+                                <input id="cnpj" name="cnpj" type="text" autocomplete="off" maxlength="18" required>
                             </div>
 
                             <div class="column">
@@ -52,7 +52,7 @@
                 <div class="container-login">
                     <div class="linha"></div>
                     <div class="menu-login">
-                        <h1>Iniciar sessão</h1>
+                        <h1 style="margin-top: 10vh;">Iniciar sessão</h1>
                         <p>Já possui uma conta? Faça login aqui embaixo.</p>
                         <?php
                         if (!empty($_SESSION["cadastroErros"]) && $_SESSION["cadastroErros"]==true) {
@@ -86,4 +86,6 @@
                 </div>
             </form>
     </section>
+    <img src="/public/assets/svg/Wave.svg" alt="Wave" class="wavecarbono">
+    <script src="../../../public/assets/js/main.js"></script>
 <?php include("footer.php");?>

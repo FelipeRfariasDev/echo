@@ -1,8 +1,8 @@
 # ECHO - GERENCIAMENTO DE FROTAS ECOLÓGICO
 
-git clone git@github.com:FelipeRfariasDev/echo.git
+git clone https://github.com/LuanODias/Echo-mvc
 
-cd echo
+cd Echo-mvc
 
 composer install
 

@@ -11,16 +11,17 @@ class Veiculos
     public function index()
     {
         $placa = "";
+        $modelo = "";
         $marca = "";
         $autonomia = "";
-
         if(@$_POST["acao"]=="buscar"){
             $placa = $_POST["placa"];
+            $modelo = $_POST["modelo"];
             $marca = $_POST["marca"];
             $autonomia = $_POST["autonomia"];
         }
         $veiculo = new Veiculo();
-        $getVeiculos = $veiculo->index($placa,$marca,$autonomia);
+        $getVeiculos = $veiculo->index($placa,$modelo,$marca,$autonomia);
         $_SESSION["getVeiculos"]=$getVeiculos;
         require_once __DIR__ . "/../Views/Pages/Auth/Veiculos/index.php";
     }

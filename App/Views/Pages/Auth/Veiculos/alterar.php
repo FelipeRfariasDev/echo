@@ -10,6 +10,10 @@ include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/Element/nav-menu-autent
     <label for="placa">Placa</label>
     <input name="placa" type="text" value="<?php echo $_SESSION["getByIdVeiculo"]["placa"];?>" required placeholder="Qual é a placa do Veículo?">
 
+    <label for="">Modelo</label>
+    <input autocomplete="off" name="modelo" type="text" required
+    value="<?php echo $_SESSION["getByIdVeiculo"]["modelo"];?>" placeholder="Digite um Modelo para editar na tabela">
+
     <label for="marca">Marca</label>
     <input name="marca" type="text" value="<?php echo $_SESSION["getByIdVeiculo"]["marca"];?>" required placeholder="Qual é a marca do Veículo?">
 

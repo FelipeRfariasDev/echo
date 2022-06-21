@@ -36,7 +36,9 @@
                 administrativo.
             </p>
             <a href="/Site/chamados/" class="btngerenciamento">Gerenciar</a>
+            
         </div>
     </div>
+    <img style="z-index: -1;" src="/public/assets/svg/Wave.svg" alt="Wave" class="wavecarbono">
 
 <?php include("footer.php");?>

@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Veiculo extends Connection
 {
-    public function index($placa=null,$marca=null,$autonomia=null)
+    public function index($placa=null,$modelo=null,$marca=null,$autonomia=null)
     {
         $conn = $this->connect();
         $sql = "select * from veiculos";
@@ -12,15 +12,19 @@ class Veiculo extends Connection
         if(!empty($placa)){
             $wherePlaca=["placa='$placa'"];
         }
+        if(!empty($modelo)){
+            $whereModelo=["modelo='$modelo'"];
+        }
         if(!empty($marca)){
             $whereMarca=["marca='$marca'"];
         }
         if(!empty($autonomia)){
             $whereAutonomia=["autonomia='$autonomia'"];
         }
-        if(!empty($wherePlaca) || !empty($whereMarca) || !empty($whereAutonomia)){
+        if(!empty($wherePlaca) || !empty($whereModelo) || !empty($whereMarca) || !empty($whereAutonomia)){
             $where = [];
             if(!empty($wherePlaca))         $where[]= implode("",$wherePlaca);
+            if(!empty($whereModelo))         $where[]= implode("",$whereModelo);
             if(!empty($whereMarca))         $where[]= implode("",$whereMarca);
             if(!empty($whereAutonomia))     $where[]= implode("",$whereAutonomia);
             $where = implode(" OR ",$where);
@@ -45,11 +49,12 @@ class Veiculo extends Connection
         if ($_POST) {
             try {
                 $placa = $_POST["placa"];
+                $modelo = $_POST["modelo"];
                 $marca = $_POST["marca"];
                 $autonomia = $_POST["autonomia"];
 
                 $conn = $this->connect();
-                $sql = "INSERT INTO `veiculos` (`placa`, `marca`, `autonomia`) VALUES ('$placa', '$marca', '$autonomia')";
+                $sql = "INSERT INTO `veiculos` (`placa`,`modelo`, `marca`, `autonomia`) VALUES ('$placa','$modelo', '$marca', '$autonomia')";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
 
@@ -80,11 +85,12 @@ class Veiculo extends Connection
             try {
                 $id = $_POST["id"];
                 $placa = $_POST["placa"];
+                $modelo = $_POST["modelo"];
                 $marca = $_POST["marca"];
                 $autonomia = $_POST["autonomia"];
 
                 $conn = $this->connect();
-                $sql = "UPDATE veiculos SET placa = '$placa',marca = '$marca',autonomia='$autonomia' WHERE (`id` = $id)";
+                $sql = "UPDATE veiculos SET placa = '$placa',modelo = '$modelo',marca = '$marca',autonomia='$autonomia' WHERE (`id` = $id)";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
 

@@ -19,10 +19,10 @@
             ?>
 
             <ul class="nav-list">
-                <li><a href="https://github.com/LuanODias-mvc" class="nav-link" target="_blank" style="border-bottom-left-radius: 40px; border-top-left-radius: 40px;">GitHub</a></li>
-                <li><a href="/Site/home/" <?php if($nome_controller=="Site" && $nome_action=="home") echo "style='background-color:#95bb87'";?> class="nav-link">Home</a></li>
-                <li><a href="/Site/integrantes/" <?php if($nome_controller=="Site" && $nome_action=="integrantes") echo "style='background-color:#95bb87'";?> class="nav-link">Integrantes</a></li>
-                <li><a href="/Site/carbono/" <?php if($nome_controller=="Site" && $nome_action=="carbono") echo "style='background-color:#95bb87'";?> class="nav-link" style="border-bottom-right-radius: 40px; border-top-right-radius: 40px;">Carbono</a></li>
+                <li><a href="/Site/home/" <?php if($nome_controller=="Site" && $nome_action=="home") echo "style='background-color:#6D995D; color: white'";?> class="nav-link">Home</a></li>
+                <li><a href="https://github.com/LuanODias-mvc" class="nav-link" target="_blank">GitHub</a></li>
+                <li><a href="/Site/integrantes/" <?php if($nome_controller=="Site" && $nome_action=="integrantes") echo "style='background-color:#6D995D'";?> class="nav-link">Integrantes</a></li>
+                <li><a href="/Site/carbono/" <?php if($nome_controller=="Site" && $nome_action=="carbono") echo "style='background-color:#6D995D'";?> class="nav-link">Carbono</a></li>
             </ul>
         </div>
         <a href="/Usuarios/login" class="btnAcessar">Acesse já</a>

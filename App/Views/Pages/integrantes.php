@@ -28,4 +28,5 @@
            </div>
         </div>
      </section>
+     <img src="/public/assets/svg/Wave.svg" alt="Wave" class="wavecarbono">
 <?php include("footer.php");?>
