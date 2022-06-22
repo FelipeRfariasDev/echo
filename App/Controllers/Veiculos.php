@@ -38,9 +38,11 @@ class Veiculos extends \Controllers
             }else{
                 $_SESSION["msgVeiculoAdicionadoErro"]=$novo_veiculo["msg_erros"];
             }
-            Header("Location: /Veiculos/index");
+            self::redirect("/Veiculos/index");
         }
         return self::view("/Auth/Veiculos/novo");
+
+
     }
 
     public function alterar()
@@ -50,10 +52,10 @@ class Veiculos extends \Controllers
             $update = $veiculo->update();
             if($update["msg_success"]==true){
                 $_SESSION["msgVeiculoAlteradoSucesso"]=true;
-                Header("Location: /Veiculos/index");
+                self::redirect("/Veiculos/index");
             }else{
                 $_SESSION["msgVeiculoAlteradoErro"]=$update["msg_erros"];
-                Header("Location: /Veiculos/index");
+                self::redirect("/Veiculos/index");
             }
         }
         $veiculo = new Veiculo();
@@ -72,6 +74,6 @@ class Veiculos extends \Controllers
         }else{
             $_SESSION["msgVeiculoRemovidoErro"]=$delete["msg_erros"];
         }
-        Header("Location: /Veiculos/index");
+        self::redirect("/Veiculos/index");
     }
 }

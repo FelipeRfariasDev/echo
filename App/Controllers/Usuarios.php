@@ -4,9 +4,11 @@ namespace App\Controllers;
 
 use App\Models\Usuario;
 
+include ("Controller.php");
+
 session_start();
 
-class Usuarios
+class Usuarios extends \Controllers
 {
     public function login()
     {
@@ -18,14 +20,14 @@ class Usuarios
                 if($data["msg_success"]==true){
                     session_id($data['id']);
                     $_SESSION["usuario"]=$data["getUsuarios"];
-                    Header("Location: /Site/principal/");
+                    self::redirect("/Site/principal/");
                 }else{
                     $_SESSION["cadastroErros"]=true;
                 }
 
             }
         }
-        require_once __DIR__ . '/../Views/Pages/login.php';
+        return self::view("login");
     }
 
     public function novo(){
@@ -34,10 +36,10 @@ class Usuarios
             $novo = $usuario->novo();
             if($novo["msg_success"]==true){
                 $_SESSION["cadastroSuccess"]=true;
-                Header("Location: /Usuarios/login/");
+                self::redirect("/Usuarios/login/");
             }else{
                 $_SESSION["cadastroNovoUsuarioErro"]=$novo["msg_erros"];
-                Header("Location: /Usuarios/login/");
+                self::redirect("/Usuarios/login/");
             }
         }
     }
@@ -45,6 +47,6 @@ class Usuarios
     public function logout()
     {
         session_destroy();
-        Header("Location: /Usuarios/login/");
+        self::redirect("/Usuarios/login/");
     }
 }
