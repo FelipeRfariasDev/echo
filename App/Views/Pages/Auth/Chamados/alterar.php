@@ -32,6 +32,14 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                         <?php endforeach; ?>
                     </select>
                 </div>
+                <div class="input-row">
+                    <label for="">Disponível</label>
+                    <select name="disponivel" required>
+                        <option value="">Selecione</option>
+                        <option value="S" <?php if($vars["getById"]["disponivel"]=="S") echo "selected";?>>SIM</option>
+                        <option value="N" <?php if($vars["getById"]["disponivel"]=="N") echo "selected";?>>NÂO</option>
+                    </select>
+                </div>
             </div>
             <input type="submit" value="Salvar" class="btncrud" />
         </section>

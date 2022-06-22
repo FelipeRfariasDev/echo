@@ -15,7 +15,7 @@ class Chamado extends Connection
     public function index($km_rodado=null,$funcionario_id=null,$veiculo_id=null)
     {
         $conn = $this->connect();
-        $sql = "SELECT $this->nome_table.id,$this->nome_table.km_rodado,$this->nome_table.data,veiculos.placa,funcionarios.nome,funcionarios.cpf
+        $sql = "SELECT $this->nome_table.id,$this->nome_table.disponivel,$this->nome_table.km_rodado,$this->nome_table.data,veiculos.placa,funcionarios.nome,funcionarios.cpf
             FROM $this->nome_table 
             JOIN veiculos ON (veiculos.id=$this->nome_table.veiculo_id) 
             JOIN funcionarios ON (funcionarios.id=$this->nome_table.funcionario_id) 
@@ -94,9 +94,10 @@ class Chamado extends Connection
                 $km_rodado = $_POST["km_rodado"];
                 $funcionario_id = $_POST["funcionario_id"];
                 $veiculo_id = $_POST["veiculo_id"];
+                $disponivel = $_POST["disponivel"];
 
                 $conn = $this->connect();
-                $sql = "UPDATE $this->nome_table SET km_rodado = '$km_rodado',funcionario_id = '$funcionario_id',veiculo_id='$veiculo_id',usuario_id=$this->login_id WHERE (`id` = $id)";
+                $sql = "UPDATE $this->nome_table SET km_rodado = '$km_rodado',funcionario_id = '$funcionario_id',veiculo_id='$veiculo_id',usuario_id=$this->login_id,disponivel='$disponivel' WHERE (`id` = $id)";
                 $stmt = $conn->prepare($sql);
                 $sucesso = $stmt->execute();
                 if (!$sucesso) {
