@@ -8,6 +8,8 @@ abstract class Connection{
     private $user = 'root';
     private $pass = '';
 
+    public $login_id;
+
     protected function connect(){
         try{
             $conn = new \PDO($this->dbname, $this->user, $this->pass);

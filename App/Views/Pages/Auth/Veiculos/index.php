@@ -2,16 +2,15 @@
 include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/header.php");
 include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-autenticado.php");
 ?>
-
-<section class="formulario">
-    <h1 class="title">Veículos</h1>
-
+    <h1 class="title" style="float: left;margin-left: 42%">Veículos <a href="/Veiculos/novo"></h1>
+    <span style=""><img style="width:1%!important;display: unset!important;align-items: center;margin-left: 10px;margin-top: 30px;" src="/public/assets/img/add.png" alt=""></a></span>
+    <br><br><br><br>
     <?php
     if (@$_SESSION["msgVeiculoAdicionadoSucesso"] == true) {
     ?>
-        <div class="notification is-success" style="color:#6D995D;text-decoration-line: underline; text-align: center;">
+        <span class="msg-success">
             <p>Veículo adicionado com sucesso!</p>
-        </div>
+        </span>
     <?php
         $_SESSION["msgVeiculoAdicionadoSucesso"] = false;
     }
@@ -20,9 +19,9 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
     <?php
     if (@$_SESSION["msgVeiculoAlteradoSucesso"] == true) {
     ?>
-        <div class="notification is-success" style="color: #6D995D;text-decoration-line: underline; text-align: center;">
+    <span class="msg-success">
             <p>Veículo alterado com sucesso!</p>
-        </div>
+    </span>
     <?php
         $_SESSION["msgVeiculoAlteradoSucesso"] = false;
     }
@@ -31,11 +30,33 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
     <?php
     if (@$_SESSION["msgVeiculoRemovidoSucesso"] == true) {
     ?>
-        <div class="notification is-success" style="color: #6D995D;text-decoration-line: underline; text-align: center;">
-            <p>Veículo excluído com sucesso!</p>
-        </div>
+    <span class="msg-success">
+        <p>Veículo excluído com sucesso!</p>
+    </span>
     <?php
         $_SESSION["msgVeiculoRemovidoSucesso"] = false;
+    }
+    ?>
+
+    <?php
+    if (@$_SESSION["msgVeiculoAdicionadoErro"] == true) {
+        ?>
+        <span class="msg-error">
+            <p><?php print_r($_SESSION["msgVeiculoAdicionadoErro"][2]);?></p>
+        </span>
+        <?php
+        $_SESSION["msgVeiculoAdicionadoErro"] = false;
+    }
+    ?>
+
+    <?php
+    if (@$_SESSION["msgVeiculoAlteradoErro"] == true) {
+        ?>
+        <span class="msg-error">
+            <p><?php print_r($_SESSION["msgVeiculoAlteradoErro"][2]);?></p>
+        </span>
+        <?php
+        $_SESSION["msgVeiculoAlteradoErro"] = false;
     }
     ?>
 
@@ -58,12 +79,8 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                 <input autocomplete="off" name="autonomia" type="text" placeholder="Digite uma Autonomia para pesquisar na tabela">
             </div>
         </div>
-
-        <div class="btncrud">
-            <button type="submit" >Procurar</button>
+        <span class="inputs"><input type="submit" value="Pesquisar" class="btncrud" /></span>
     </form>
-    <button><a href="/Veiculos/novo" style="color: white;" >Adicionar +</a></button>
-    </div>
 
     <?php if (!empty($_SESSION["getVeiculos"])) { ?>
         <table>
@@ -72,7 +89,7 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Autonomia</th>
-                <th>Ações</th>
+                <th></th>
             </tr>
             <?php
             foreach ($_SESSION["getVeiculos"] as $getVeiculo) : ?>
@@ -95,9 +112,5 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
     <?php } else { ?>
         <h3 style="text-align: center; font-size: 30px; color: #6D995D;">Resultado da busca: Nenhum veiculo cadastrado</h3>
     <?php } ?>
-    <?php include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/footer.php"); ?>
-</section>
-<img style="z-index: -1;" src="/public/assets/svg/Wave.svg" alt="Wave" class="wavecarbono">
 </body>
-
 </html>

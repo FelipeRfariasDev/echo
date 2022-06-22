@@ -1,19 +1,32 @@
 <?php include("header.php");?>
 <?php include("Element/nav-menu-login.php");?>
     <section class="container">
-            <div class="container-left">
+            <span class="container-left">
                 <h1>Registre-se Gratuitamente</h1>
                 <p>gerencie sua empresa pensando verde!</p>
                 <?php
                 if ( !empty($_SESSION["cadastroSuccess"]) &&  $_SESSION["cadastroSuccess"]==true) {
                 ?>
-                    <div class="notification is-success" style="color: #ffffff;text-decoration-line: underline;background-color: #6d985d;">
+                    <span class="msg-success">
                         <p>Cadastro realizado com sucesso!</p>
-                    </div>
+                    </span>
                 <?php
                     $_SESSION["cadastroSuccess"]=false;
                 }
                 ?>
+
+                <?php
+                if ( !empty($_SESSION["cadastroNovoUsuarioErro"]) &&  $_SESSION["cadastroNovoUsuarioErro"]==true) {
+                    ?>
+                    <span class="msg-error">
+                        <p><?php print_r($_SESSION["cadastroNovoUsuarioErro"][2]);?></p>
+                    </span>
+                    <?php
+                    $_SESSION["cadastroNovoUsuarioErro"]=false;
+                }
+                ?>
+
+
                 <form action="/Usuarios/novo" method="POST">
                     <input type="hidden" value="novo" name="tiporequisicao">
                     <div class="format">
@@ -51,15 +64,15 @@
                 <input type="hidden" value="login" name="tiporequisicao">
                 <div class="container-login">
                     <div class="linha"></div>
-                    <div class="menu-login">
+                    <span class="menu-login">
                         <h1 style="margin-top: 10vh;">Iniciar sessão</h1>
                         <p>Já possui uma conta? Faça login aqui embaixo.</p>
                         <?php
                         if (!empty($_SESSION["cadastroErros"]) && $_SESSION["cadastroErros"]==true) {
                         ?>
-                            <div class="notification is-error" style="color: #af4646;text-decoration-line: underline;font-size: small;font-weight: bolder;">
+                            <span class="msg-error">
                                 <p>Email ou senha incorretos!</p>
-                            </div>
+                            </span>
                         <?php
                             $_SESSION["cadastroErros"]=false;
                         }

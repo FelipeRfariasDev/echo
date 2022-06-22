@@ -4,10 +4,16 @@ namespace App\Models;
 
 class Veiculo extends Connection
 {
+
+    function __construct()
+    {
+        $this->login_id = $_SESSION["usuario"]["id"];
+    }
+
     public function index($placa=null,$modelo=null,$marca=null,$autonomia=null)
     {
         $conn = $this->connect();
-        $sql = "select * from veiculos";
+        $sql = "select * from veiculos WHERE `usuario_id`=$this->login_id";
 
         if(!empty($placa)){
             $wherePlaca=["placa='$placa'"];
@@ -28,7 +34,7 @@ class Veiculo extends Connection
             if(!empty($whereMarca))         $where[]= implode("",$whereMarca);
             if(!empty($whereAutonomia))     $where[]= implode("",$whereAutonomia);
             $where = implode(" OR ",$where);
-            $sql = $sql . " WHERE ".$where;
+            $sql = $sql . " AND (".$where.")";
         }
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -42,10 +48,6 @@ class Veiculo extends Connection
 
     public function novo()
     {
-        //$sql = "INSERT INTO `veiculos` (`id`, `placa`, `marca`, `autonomia`) VALUES (NULL, 'MER-1839', 'Maserati', '60')";
-        //$sql = "INSERT INTO `veiculos` (`id`, `placa`, `marca`, `autonomia`) VALUES (NULL, 'HOX-7464', 'GREAT WALL', '60')";
-        //$sql = "INSERT INTO `veiculos` (`id`, `placa`, `marca`, `autonomia`) VALUES (NULL, 'JUN-7472', 'AM Gen', '55')";
-
         if ($_POST) {
             try {
                 $placa = $_POST["placa"];
@@ -54,17 +56,27 @@ class Veiculo extends Connection
                 $autonomia = $_POST["autonomia"];
 
                 $conn = $this->connect();
-                $sql = "INSERT INTO `veiculos` (`placa`,`modelo`, `marca`, `autonomia`) VALUES ('$placa','$modelo', '$marca', '$autonomia')";
+                $sql = "INSERT INTO `veiculos` (`placa`,`modelo`, `marca`, `autonomia`,`usuario_id`) VALUES ('$placa','$modelo', '$marca', '$autonomia',$this->login_id)";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute();
+                $sucesso = $stmt->execute();
+                if (!$sucesso) {
+                    return[
+                        "msg_success"=>false,
+                        "msg_erros"=>$stmt->errorInfo()
+                    ];
 
-                return true;
-            } catch (\PDOException $e) {
-                return false;
+                }else{
+                    return[
+                        "msg_success"=>true
+                    ];
+                }
+            } catch (PDOException $e) {
+                return[
+                    "msg_success"=>false,
+                    "msg_erros"=>$e->getMessage()
+                ];
             }
         }
-        return false;
-
     }
     public function getById($id)
     {
@@ -90,31 +102,50 @@ class Veiculo extends Connection
                 $autonomia = $_POST["autonomia"];
 
                 $conn = $this->connect();
-                $sql = "UPDATE veiculos SET placa = '$placa',modelo = '$modelo',marca = '$marca',autonomia='$autonomia' WHERE (`id` = $id)";
+                $sql = "UPDATE veiculos SET placa = '$placa',modelo = '$modelo',marca = '$marca',autonomia='$autonomia',usuario_id=$this->login_id WHERE (`id` = $id)";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute();
-
+                $sucesso = $stmt->execute();
+                if (!$sucesso) {
+                    return[
+                        "msg_success"=>false,
+                        "msg_erros"=>$stmt->errorInfo()
+                    ];
+                }else{
+                    return[
+                        "msg_success"=>true
+                    ];
+                }
                 return true;
-            } catch (\PDOException $e) {
-                return false;
+            } catch (PDOException $e) {
+                return[
+                    "msg_success"=>false,
+                    "msg_erros"=>$e->getMessage()
+                ];
             }
         }
-        return false;
     }
 
     public function delete()
     {
-            try {
-                $id = $_GET["id"];
-                $conn = $this->connect();
-                $sql = "DELETE FROM veiculos WHERE (`id` = $id)";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute();
-
+        try {
+            $id = $_GET["id"];
+            $conn = $this->connect();
+            $sql = "DELETE FROM veiculos WHERE (`id` = $id) and usuario_id=$this->login_id";
+            $stmt = $conn->prepare($sql);
+            $sucesso = $stmt->execute();
+            if (!$sucesso) {
+                return[
+                    "msg_success"=>false,
+                    "msg_erros"=>$stmt->errorInfo()
+                ];
+            }else{
                 return true;
-            } catch (\PDOException $e) {
-                return false;
             }
-        return false;
+        } catch (PDOException $e) {
+            return[
+                "msg_success"=>false,
+                "msg_erros"=>$e->getMessage()
+            ];
+        }
     }
 }

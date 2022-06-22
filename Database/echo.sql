@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19-Jun-2022 às 02:02
+-- Tempo de geração: 22-Jun-2022 às 04:22
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 7.3.33
 
@@ -47,7 +47,8 @@ CREATE TABLE `chamados` (
 CREATE TABLE `funcionarios` (
   `id` int(11) NOT NULL,
   `nome` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `cpf` varchar(45) COLLATE utf8_unicode_ci NOT NULL
+  `cpf` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -73,8 +74,10 @@ CREATE TABLE `usuario` (
 CREATE TABLE `veiculos` (
   `id` int(11) NOT NULL,
   `placa` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `modelo` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `marca` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `autonomia` varchar(45) COLLATE utf8_unicode_ci NOT NULL
+  `autonomia` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -94,19 +97,25 @@ ALTER TABLE `chamados`
 -- Índices para tabela `funcionarios`
 --
 ALTER TABLE `funcionarios`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `cpf_UNIQUE` (`cpf`),
+  ADD KEY `fk_funcionarios_usuario_idx` (`usuario_id`);
 
 --
 -- Índices para tabela `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `cnpj_UNIQUE` (`cnpj`),
+  ADD UNIQUE KEY `email_UNIQUE` (`email`);
 
 --
 -- Índices para tabela `veiculos`
 --
 ALTER TABLE `veiculos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `placa_UNIQUE` (`placa`),
+  ADD KEY `fk_veiculos_usuario_idx` (`usuario_id`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -144,9 +153,21 @@ ALTER TABLE `veiculos`
 -- Limitadores para a tabela `chamados`
 --
 ALTER TABLE `chamados`
-  ADD CONSTRAINT `fk_chamados_funcionarios` FOREIGN KEY (`funcionarios_id`) REFERENCES `funcionarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_chamados_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_chamados_veiculos` FOREIGN KEY (`veiculos_id`) REFERENCES `veiculos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT `fk_chamados_funcionarios` FOREIGN KEY (`funcionarios_id`) REFERENCES `funcionarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    ADD CONSTRAINT `fk_chamados_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    ADD CONSTRAINT `fk_chamados_veiculos` FOREIGN KEY (`veiculos_id`) REFERENCES `veiculos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `funcionarios`
+--
+ALTER TABLE `funcionarios`
+  ADD CONSTRAINT `fk_funcionarios_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `veiculos`
+--
+ALTER TABLE `veiculos`
+  ADD CONSTRAINT `fk_veiculos_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

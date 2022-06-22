@@ -22,14 +22,24 @@ class Usuario extends Connection{
                 $stmt->bindParam(':razao_social', $razao_social);
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':senha', $senha);
-                $stmt->execute();
-
-                return true;
-            } catch (\PDOException $e) {
-                return false;
+                $sucesso = $stmt->execute();
+                if (!$sucesso) {
+                    return[
+                        "msg_success"=>false,
+                        "msg_erros"=>$stmt->errorInfo()
+                    ];
+                }else{
+                    return[
+                        "msg_success"=>true
+                    ];
+                }
+            } catch (PDOException $e) {
+                return[
+                    "msg_success"=>false,
+                    "msg_erros"=>$e->getMessage()
+                ];
             }
         }
-        return false;
     }
 
     public function login()
@@ -38,17 +48,25 @@ class Usuario extends Connection{
         $senha = md5($_POST["senha"]);
 
         $conn = $this->connect();
-        $sql = "select id,cnpj,razao_social,email from usuario where email = :email and senha = (:senha)";
-
+        $sql = "select id,cnpj,razao_social,email from usuario where email = '$email' and senha = '$senha'";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':senha', $senha);
-        $stmt->execute();
+        $sucesso = $stmt->execute();
+        if (!$sucesso) {
+            return[
+                "msg_success"=>false,
+                "msg_erros"=>$stmt->errorInfo()
+            ];
+        }
         $result = $stmt->fetch();
         if ($result == true) {
-            return $result;
+            return[
+                "msg_success"=>true,
+                "getUsuarios"=>$result
+            ];
         }else{
-            return false;
+            return[
+                "msg_success"=>false
+            ];
         }
     }
 }

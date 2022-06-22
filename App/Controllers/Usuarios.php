@@ -14,14 +14,15 @@ class Usuarios
             if($_POST["tiporequisicao"]=="login"){
                 $usuario = new Usuario();
                 $data = $usuario->login();
-                if($data!=false){
+
+                if($data["msg_success"]==true){
                     session_id($data['id']);
-                    $_SESSION["usuario"]=$data;
+                    $_SESSION["usuario"]=$data["getUsuarios"];
                     Header("Location: /Site/principal/");
                 }else{
-                    //erro de login, usuário e senha não encontrado
                     $_SESSION["cadastroErros"]=true;
                 }
+
             }
         }
         require_once __DIR__ . '/../Views/Pages/login.php';
@@ -29,15 +30,15 @@ class Usuarios
 
     public function novo(){
         if($_POST["tiporequisicao"]=="novo"){
-
             $usuario = new Usuario();
             $novo = $usuario->novo();
-            if($novo==true){
+            print_r($novo);
+            if($novo["msg_success"]==true){
                 $_SESSION["cadastroSuccess"]=true;
                 Header("Location: /Usuarios/login/");
             }else{
-                echo "erro ao tentar cadastrar o usuário";
-                exit;
+                $_SESSION["cadastroNovoUsuarioErro"]=$novo["msg_erros"];
+                Header("Location: /Usuarios/login/");
             }
         }
     }
