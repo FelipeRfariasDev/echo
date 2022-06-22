@@ -8,6 +8,7 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
 
     <?php include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/Element/msg.php");?>
 
+
     <form action="/<?php echo $vars["nameController"];?>/index" method="POST">
         <input type="hidden" name="acao" value="buscar">
         <div class="inputs">

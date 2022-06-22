@@ -142,7 +142,9 @@ class Veiculo extends Connection
                     "msg_erros"=>$stmt->errorInfo()
                 ];
             }else{
-                return true;
+                return[
+                    "msg_success"=>true
+                ];
             }
         } catch (PDOException $e) {
             return[

@@ -52,3 +52,16 @@ if (@$_SESSION["msgAlteradoErro"] == true) {
     $_SESSION["msgAlteradoErro"] = false;
 }
 ?>
+
+<?php
+if (@$_SESSION["msgRemovidoErro"] == true) {
+    ?>
+    <span class="msg-error">
+            <p><?php print_r($_SESSION["msgRemovidoErro"][2]);?></p>
+        </span>
+    <?php
+    $_SESSION["msgRemovidoErro"] = false;
+}
+?>
+
+

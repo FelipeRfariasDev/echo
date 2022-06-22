@@ -73,6 +73,7 @@ class VeiculosControllers extends \Controllers
     {
         $model = new Veiculo();
         $delete = $model->delete();
+
         if($delete["msg_success"]==true){
             $_SESSION["msgRemovidoSucesso"]=true;
         }else{

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22-Jun-2022 às 04:22
+-- Tempo de geração: 22-Jun-2022 às 20:35
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 7.3.33
 
@@ -30,11 +30,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `chamados` (
   `id` int(11) NOT NULL,
   `km_rodado` double NOT NULL,
+  `data` date NOT NULL,
   `funcionario_id` int(11) NOT NULL,
   `veiculo_id` int(11) NOT NULL,
-  `data` date NOT NULL,
-  `funcionarios_id` int(11) NOT NULL,
-  `veiculos_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -89,8 +87,9 @@ CREATE TABLE `veiculos` (
 --
 ALTER TABLE `chamados`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_chamados_funcionarios_idx` (`funcionarios_id`),
-  ADD KEY `fk_chamados_veiculos_idx` (`veiculos_id`),
+  ADD UNIQUE KEY `fk_chamados_data_veiculo_unique` (`data`,`veiculo_id`),
+  ADD KEY `fk_chamados_funcionarios_idx` (`funcionario_id`),
+  ADD KEY `fk_chamados_veiculos_idx` (`veiculo_id`),
   ADD KEY `fk_chamados_usuario_idx` (`usuario_id`);
 
 --
@@ -99,7 +98,7 @@ ALTER TABLE `chamados`
 ALTER TABLE `funcionarios`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `cpf_UNIQUE` (`cpf`),
-  ADD KEY `fk_funcionarios_usuario_idx` (`usuario_id`);
+  ADD KEY `fk_funcionarios_usuario1_idx` (`usuario_id`);
 
 --
 -- Índices para tabela `usuario`
@@ -115,35 +114,7 @@ ALTER TABLE `usuario`
 ALTER TABLE `veiculos`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `placa_UNIQUE` (`placa`),
-  ADD KEY `fk_veiculos_usuario_idx` (`usuario_id`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `chamados`
---
-ALTER TABLE `chamados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `funcionarios`
---
-ALTER TABLE `funcionarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `veiculos`
---
-ALTER TABLE `veiculos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  ADD KEY `fk_veiculos_usuario1_idx` (`usuario_id`);
 
 --
 -- Restrições para despejos de tabelas
@@ -153,21 +124,21 @@ ALTER TABLE `veiculos`
 -- Limitadores para a tabela `chamados`
 --
 ALTER TABLE `chamados`
-    ADD CONSTRAINT `fk_chamados_funcionarios` FOREIGN KEY (`funcionarios_id`) REFERENCES `funcionarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    ADD CONSTRAINT `fk_chamados_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-    ADD CONSTRAINT `fk_chamados_veiculos` FOREIGN KEY (`veiculos_id`) REFERENCES `veiculos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_chamados_funcionarios` FOREIGN KEY (`funcionario_id`) REFERENCES `funcionarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_chamados_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_chamados_veiculos` FOREIGN KEY (`veiculo_id`) REFERENCES `veiculos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `funcionarios`
 --
 ALTER TABLE `funcionarios`
-  ADD CONSTRAINT `fk_funcionarios_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_funcionarios_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `veiculos`
 --
 ALTER TABLE `veiculos`
-  ADD CONSTRAINT `fk_veiculos_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_veiculos_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
