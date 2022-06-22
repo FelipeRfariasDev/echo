@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22-Jun-2022 às 20:35
+-- Tempo de geração: 22-Jun-2022 às 22:10
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 7.3.33
 
@@ -33,8 +33,12 @@ CREATE TABLE `chamados` (
   `data` date NOT NULL,
   `funcionario_id` int(11) NOT NULL,
   `veiculo_id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL
+  `usuario_id` int(11) NOT NULL,
+  `disponivel` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
 
 -- --------------------------------------------------------
 
@@ -49,6 +53,8 @@ CREATE TABLE `funcionarios` (
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +68,7 @@ CREATE TABLE `usuario` (
   `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `senha` varchar(32) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 -- --------------------------------------------------------
 
@@ -78,6 +85,7 @@ CREATE TABLE `veiculos` (
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+
 --
 -- Índices para tabelas despejadas
 --
@@ -87,7 +95,7 @@ CREATE TABLE `veiculos` (
 --
 ALTER TABLE `chamados`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `fk_chamados_data_veiculo_unique` (`data`,`veiculo_id`),
+  ADD UNIQUE KEY `kf_veiculo_disponivel` (`disponivel`,`veiculo_id`),
   ADD KEY `fk_chamados_funcionarios_idx` (`funcionario_id`),
   ADD KEY `fk_chamados_veiculos_idx` (`veiculo_id`),
   ADD KEY `fk_chamados_usuario_idx` (`usuario_id`);
@@ -115,6 +123,34 @@ ALTER TABLE `veiculos`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `placa_UNIQUE` (`placa`),
   ADD KEY `fk_veiculos_usuario1_idx` (`usuario_id`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `chamados`
+--
+ALTER TABLE `chamados`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT de tabela `funcionarios`
+--
+ALTER TABLE `funcionarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT de tabela `veiculos`
+--
+ALTER TABLE `veiculos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Restrições para despejos de tabelas
