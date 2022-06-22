@@ -38,6 +38,7 @@ class Veiculo extends Connection
             $where = implode(" OR ",$where);
             $sql = $sql . " AND (".$where.")";
         }
+
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();

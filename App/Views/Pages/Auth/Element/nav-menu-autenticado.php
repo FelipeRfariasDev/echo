@@ -15,8 +15,8 @@
             ?>
             <ul class="nav-list">
                 <li><a href="/Veiculos/index/" class="nav-link" <?php if($nome_controller=="Veiculos") echo "style='background-color:#95bb87'";?>>Veiculos</a></li>
-                <li><a href="/Funcionarios/index" <?php if($nome_controller=="Funcionarios" && $nome_action=="index") echo "style='background-color:#95bb87'";?> class="nav-link">Funcionários</a></li>
-                <li><a href="/Site/chamados/" <?php if($nome_controller=="Site" && $nome_action=="chamados") echo "style='background-color:#95bb87'";?> class="nav-link" style="border-bottom-right-radius: 40px; border-top-right-radius: 40px;">Chamados</a></li>
+                <li><a href="/Funcionarios/index" <?php if($nome_controller=="Funcionarios") echo "style='background-color:#95bb87'";?> class="nav-link">Funcionários</a></li>
+                <li><a href="/Chamados/index/" <?php if($nome_controller=="Chamados") echo "style='background-color:#95bb87'";?> class="nav-link" style="border-bottom-right-radius: 40px; border-top-right-radius: 40px;">Chamados</a></li>
                 <li><a href="/Relatorios/index/" <?php if($nome_controller=="Relatorios") echo "style='background-color:#95bb87'";?> class="nav-link" style="border-bottom-right-radius: 40px; border-top-right-radius: 40px;">Relatórios</a></li>
             </ul>
         </div>
