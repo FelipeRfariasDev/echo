@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 session_start();
 
-class Site
+class SiteControllers
 {
     public function home()
     {

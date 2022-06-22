@@ -68,13 +68,13 @@
                         <h1 style="margin-top: 10vh;">Iniciar sessão</h1>
                         <p>Já possui uma conta? Faça login aqui embaixo.</p>
                         <?php
-                        if (!empty($_SESSION["cadastroErros"]) && $_SESSION["cadastroErros"]==true) {
+                        if (!empty($_SESSION["msgLoginErro"]) && $_SESSION["msgLoginErro"]==true) {
                         ?>
                             <span class="msg-error">
                                 <p>Email ou senha incorretos!</p>
                             </span>
                         <?php
-                            $_SESSION["cadastroErros"]=false;
+                            $_SESSION["msgLoginErro"]=false;
                         }
                         ?>
                         <div class="input-login">

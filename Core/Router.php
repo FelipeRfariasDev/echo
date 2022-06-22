@@ -10,12 +10,12 @@
         public function __construct(){
             $router = $this->url();
 
-           if(file_exists('App/Controllers/' . ucfirst($router[0]) . '.php')):
+           if(file_exists('App/Controllers/' . ucfirst($router[0]) . 'Controllers.php')):
                $this->controller = $router[0];
                unset($router[0]);
             endif;
 
-           $class = "\\App\\Controllers\\" . ucfirst($this->controller);
+           $class = "\\App\\Controllers\\" . ucfirst($this->controller)."Controllers";
            $object = new $class;
             
 

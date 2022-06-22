@@ -8,8 +8,15 @@ include ("Controller.php");
 
 session_start();
 
-class Usuarios extends \Controllers
+class UsuariosControllers extends \Controllers
 {
+    private $name_controller;
+
+    function __construct()
+    {
+        $this->nameController = "Usuarios";
+    }
+
     public function login()
     {
         if ($_POST) {
@@ -20,9 +27,12 @@ class Usuarios extends \Controllers
                 if($data["msg_success"]==true){
                     session_id($data['id']);
                     $_SESSION["usuario"]=$data["getUsuarios"];
+
+                    $_SESSION["msgLoginSucesso"]="Login Realizado com Sucesso!";
+
                     self::redirect("/Site/principal/");
                 }else{
-                    $_SESSION["cadastroErros"]=true;
+                    $_SESSION["msgLoginErro"]=true;
                 }
 
             }
@@ -35,11 +45,11 @@ class Usuarios extends \Controllers
             $usuario = new Usuario();
             $novo = $usuario->novo();
             if($novo["msg_success"]==true){
-                $_SESSION["cadastroSuccess"]=true;
-                self::redirect("/Usuarios/login/");
+                $_SESSION["msgAdicionadoSucesso"]=true;
+                self::redirect("/$this->nameController/login/");
             }else{
-                $_SESSION["cadastroNovoUsuarioErro"]=$novo["msg_erros"];
-                self::redirect("/Usuarios/login/");
+                $_SESSION["msgAdicionadoErro"]=$novo["msg_erros"];
+                self::redirect("/$this->nameController/login/");
             }
         }
     }
@@ -47,6 +57,6 @@ class Usuarios extends \Controllers
     public function logout()
     {
         session_destroy();
-        self::redirect("/Usuarios/login/");
+        self::redirect("/$this->nameController/login/");
     }
 }

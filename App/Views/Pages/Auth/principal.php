@@ -1,5 +1,16 @@
 <?php include("header.php");?>
 <?php include("Element/nav-menu-autenticado.php");?>
+
+<?php
+if (@$_SESSION["msgLoginSucesso"] == true) {
+    ?>
+    <span class="msg-success">
+            <p><?php print_r($_SESSION["msgLoginSucesso"])?></p>
+        </span>
+    <?php
+    $_SESSION["msgLoginSucesso"] = false;
+}
+?>
     <!--================== CONTAINER ==================-->
     <div class="container-principal">
         <div class="card-principal">

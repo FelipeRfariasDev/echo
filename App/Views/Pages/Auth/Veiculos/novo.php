@@ -3,11 +3,11 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/header.php");
 include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-autenticado.php");
 ?>
 
-<h1 class="title">Cadastro de Veiculos</h1>
+<h1 class="title">Cadastro de <?php echo $vars["nameController"];?></h1>
 
-<a style="color: white;" href='/Veiculos/index'><span class="btncrud">< Voltar</span></a>
+<a style="color: white;" href='/<?php echo $vars["nameController"];?>/index'><span class="btncrud">< Voltar</span></a>
 
-<form action="/Veiculos/novo" method="POST">
+<form action="/<?php echo $vars["nameController"];?>/novo" method="POST">
     <section class="formulario">
         <div class="inputs">
             <div class="input-row">
