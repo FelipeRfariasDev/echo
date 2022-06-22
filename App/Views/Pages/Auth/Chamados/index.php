@@ -52,7 +52,7 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                 <tr>
                     <td><?php echo $linha["km_rodado"]; ?></td>
                     <td><?php echo date_format(date_create($linha["data"]), 'd/m/Y'); ?></td>
-                    <td><?php echo @$linha["Co2"]; ?></td>
+                    <td><?php echo ($linha["km_rodado"]* 0.75 * 3.7); ?> kg</td>
                     <td><?php echo $linha["nome"] ?></td>
                     <td><?php echo $linha["placa"]; ?></td>
                     <td><?php echo $linha["disponivel"]; ?></td>
