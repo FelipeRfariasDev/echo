@@ -4,10 +4,13 @@ namespace App\Controllers;
 
 use App\Models\Veiculo;
 
+include ("Controller.php");
+
 session_start();
 
-class Veiculos
+class Veiculos extends \Controllers
 {
+
     public function index()
     {
         $placa = "";
@@ -22,8 +25,7 @@ class Veiculos
         }
         $veiculo = new Veiculo();
         $getVeiculos = $veiculo->index($placa,$modelo,$marca,$autonomia);
-        $_SESSION["getVeiculos"]=$getVeiculos;
-        require_once __DIR__ . "/../Views/Pages/Auth/Veiculos/index.php";
+        return self::view("Auth/Veiculos/index",["getVeiculos"=>$getVeiculos]);
     }
 
     public function novo()
@@ -38,7 +40,7 @@ class Veiculos
             }
             Header("Location: /Veiculos/index");
         }
-        require_once __DIR__ . "/../Views/Pages/Auth/Veiculos/novo.php";
+        return self::view("/Auth/Veiculos/novo");
     }
 
     public function alterar()
@@ -56,8 +58,7 @@ class Veiculos
         }
         $veiculo = new Veiculo();
         $getByIdVeiculo = $veiculo->getById($_GET["id"]);
-        $_SESSION["getByIdVeiculo"]=$getByIdVeiculo;
-        require_once __DIR__ . "/../Views/Pages/Auth/Veiculos/alterar.php";
+        return self::view("Auth/Veiculos/alterar",["getByIdVeiculo"=>$getByIdVeiculo]);
     }
 
     public function excluir()

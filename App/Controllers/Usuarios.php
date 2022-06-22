@@ -32,7 +32,6 @@ class Usuarios
         if($_POST["tiporequisicao"]=="novo"){
             $usuario = new Usuario();
             $novo = $usuario->novo();
-            print_r($novo);
             if($novo["msg_success"]==true){
                 $_SESSION["cadastroSuccess"]=true;
                 Header("Location: /Usuarios/login/");

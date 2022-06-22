@@ -82,7 +82,7 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
         <span class="inputs"><input type="submit" value="Pesquisar" class="btncrud" /></span>
     </form>
 
-    <?php if (!empty($_SESSION["getVeiculos"])) { ?>
+    <?php if (!empty($vars["getVeiculos"])) { ?>
         <table>
             <tr>
                 <th>Placa</th>
@@ -92,7 +92,7 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                 <th></th>
             </tr>
             <?php
-            foreach ($_SESSION["getVeiculos"] as $getVeiculo) : ?>
+            foreach ($vars["getVeiculos"] as $getVeiculo) : ?>
                 <tr>
                     <td><?php echo $getVeiculo["placa"]; ?></td>
                     <td><?php echo $getVeiculo["marca"]; ?></td>
