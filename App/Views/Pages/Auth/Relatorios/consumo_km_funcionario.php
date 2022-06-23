@@ -2,7 +2,7 @@
 include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/header.php");
 include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-autenticado.php");
 ?>
-<h1 class="title" style="float: left;margin-left: 12%">Qtd Consumo Veiculos/Funcionário</h1>
+<h1 class="title" style="float: left;margin-left: 12%">Consumo KM por Funcionário</h1>
 <a style="color: white;" href='/<?php echo $vars["nameController"];?>/index'><span class="btncrud">< Voltar</span></a>
 
 <label for="">De </label>
@@ -22,7 +22,7 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
             <tr>
                 <td><?php echo $linha["nome"]; ?></td>
                 <td><?php echo $linha["cpf"]; ?></td>
-                <td><?php echo $linha["qtd_consumo_veiculo_funcionario"]; ?></td>
+                <td><?php echo $linha["total_km_rodado"]; ?></td>
             </tr>
         <?php endforeach;
         ?>
