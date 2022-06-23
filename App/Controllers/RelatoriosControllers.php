@@ -41,4 +41,18 @@ class RelatoriosControllers extends \Controllers
             ]
         );
     }
+    public function consumo_veiculo_funcionario($data_inicio,$data_fim){
+
+        $getData = $this->modelRelatorio->consumo_veiculo_funcionario($data_inicio,$data_fim);
+        $getIntervaloData = ["inicio"=>$data_inicio,"fim"=>$data_fim];
+
+        return self::view(
+            "Auth/$this->nameController/consumo_veiculo_funcionario",
+            [
+                "nameController"=>$this->nameController,
+                "getData"=>$getData,
+                "getIntervaloData"=>$getIntervaloData
+            ]
+        );
+    }
 }
