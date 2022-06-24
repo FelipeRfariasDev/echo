@@ -73,11 +73,11 @@ class ChamadosControllers extends \Controllers
 
     }
 
-    public function alterar()
+    public function alterar($id)
     {
         if ($_POST) {
             $model = new Chamado();
-            $update = $model->update();
+            $update = $model->update($id);
             if($update["msg_success"]==true){
                 $_SESSION["msgAlteradoSucesso"]=true;
                 self::redirect("/$this->nameController/index");
@@ -87,7 +87,7 @@ class ChamadosControllers extends \Controllers
             }
         }
         $model = new Chamado();
-        $getById = $model->getById($_GET["id"]);
+        $getById = $model->getById($id);
 
         $modelVeiculo = new Veiculo();
         $modelFuncionario = new Funcionario();
@@ -100,17 +100,5 @@ class ChamadosControllers extends \Controllers
                 "getById"=>$getById,
                 "nameController"=>$this->nameController
             ]);
-    }
-
-    public function excluir()
-    {
-        $model = new Chamado();
-        $delete = $model->delete();
-        if($delete["msg_success"]==true){
-            $_SESSION["msgRemovidoSucesso"]=true;
-        }else{
-            $_SESSION["msgRemovidoErro"]=$delete["msg_erros"];
-        }
-        self::redirect("/$this->nameController/index");
     }
 }

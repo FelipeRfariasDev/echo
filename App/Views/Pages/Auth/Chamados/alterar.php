@@ -7,14 +7,12 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
 
     <a style="color: white;" href='/<?php echo $vars["nameController"];?>/index'><span class="btncrud">< Voltar</span></a>
 
-    <form action="/<?php echo $vars["nameController"];?>/alterar" method="POST">
-        <input type="hidden" name="id" value="<?php echo $vars["getById"]["id"];?>">
+    <form action="/<?php echo $vars["nameController"];?>/alterar/<?php echo $vars["getById"]["id"];?>" method="POST">
         <section class="formulario">
             <div class="inputs">
                 <div class="input-row">
                     <label for="">Km rodado</label>
                     <input autocomplete="off" name="km_rodado" type="text" value="<?php echo $vars["getById"]["km_rodado"];?>" placeholder="Digite Km rodado" required>
-
                     <label for="">Funcionários</label>
                     <select name="funcionario_id" required>
                         <option value="">Seleciona um Funcionário</option>

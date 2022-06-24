@@ -30,7 +30,7 @@ class Chamado extends Connection
         if(!empty($veiculo_id)){
             $sql .=" AND veiculo_id='$veiculo_id'";
         }
-        //echo $sql;
+
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -86,11 +86,10 @@ class Chamado extends Connection
             return false;
         }
     }
-    public function update()
+    public function update($id)
     {
         if ($_POST) {
             try {
-                $id = $_POST["id"];
                 $km_rodado = $_POST["km_rodado"];
                 $funcionario_id = $_POST["funcionario_id"];
                 $veiculo_id = $_POST["veiculo_id"];
@@ -117,30 +116,6 @@ class Chamado extends Connection
                     "msg_erros"=>$e->getMessage()
                 ];
             }
-        }
-    }
-
-    public function delete()
-    {
-        try {
-            $id = $_GET["id"];
-            $conn = $this->connect();
-            $sql = "DELETE FROM $this->nome_table WHERE (`id` = $id) and usuario_id=$this->login_id";
-            $stmt = $conn->prepare($sql);
-            $sucesso = $stmt->execute();
-            if (!$sucesso) {
-                return[
-                    "msg_success"=>false,
-                    "msg_erros"=>$stmt->errorInfo()
-                ];
-            }else{
-                return true;
-            }
-        } catch (PDOException $e) {
-            return[
-                "msg_success"=>false,
-                "msg_erros"=>$e->getMessage()
-            ];
         }
     }
 }

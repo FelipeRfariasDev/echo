@@ -58,8 +58,7 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                     <td><?php echo $linha["disponivel"]; ?></td>
                     <td>
                         <div class="ud">
-                        <a href='/<?php echo $vars["nameController"];?>/alterar/&id=<?php echo $linha["id"]; ?>'><img style="width: 56px; height: 56px;" src="/public/assets/svg/edit.svg" alt=""></a>
-                        <a href='/<?php echo $vars["nameController"];?>/excluir/&id=<?php echo $linha["id"]; ?>' onclick="javascript:return confirm('Tem certeza que deseja excluir?')"><img style="width: 45px; height: 45px;" src="/public/assets/svg/remove.svg"></a>
+                        <a href='/<?php echo $vars["nameController"];?>/alterar/<?php echo $linha["id"]; ?>'><img style="width: 56px; height: 56px;" src="/public/assets/svg/edit.svg" alt=""></a>
                         </div>
                     </td>
                 </tr>
