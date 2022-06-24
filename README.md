@@ -10,17 +10,29 @@ Em App/Models/Connection.php verfique os dados de conexão com o banco de dados.
 
 ![alt text](https://github.com/FelipeRfariasDev/echo/blob/main/Database/EER/diagrama.PNG?raw=true)
 
-Acesse o arquivo:
+Siga os seguintes passos para configurar o vhosts no apache
+
+1 -> Acesse o arquivo:
 
 C:\Windows\System32\drivers\etc\hosts
 
+Adicione a linha a baixo no final do arquivo
+
 127.0.0.1 echo-mvc.com.br
+
+Exemplo: https://github.com/FelipeRfariasDev/echo/blob/main/vhosts/hosts
+
+2 -> Acesse o arquivo:
 
 C:\xampp\apache\conf\extra\httpd-vhosts.conf
 
 ![alt text](https://github.com/FelipeRfariasDev/echo/blob/main/public/assets/img/virtualhost.PNG?raw=true)
 
-Via url http://echo-mvc.com.br/
+Exemplo: https://github.com/FelipeRfariasDev/echo/blob/main/vhosts/httpd-vhosts.conf
+
+Após as configurações é necessário reiniciar o apache.
+
+Em seguida acesse o endereço http://echo-mvc.com.br/
 
 
 ![alt text](https://github.com/FelipeRfariasDev/echo/blob/main/public/assets/img/home.PNG?raw=true)
