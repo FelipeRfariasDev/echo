@@ -36,3 +36,15 @@ Em seguida acesse o endereço http://echo-mvc.com.br/
 
 
 ![alt text](https://github.com/FelipeRfariasDev/echo/blob/main/public/assets/img/home.PNG?raw=true)
+
+### Para visualizar os logs conforme configuramos no VirtualHost
+
+ErrorLog C:\xampp\apache\logs\dummy-host-echo-mvc.example.com-error.log
+
+CustomLog C:\xampp\apache\logs\dummy-host-echo-mvc.example.com-access.log
+
+Exemplos:
+
+    -> https://github.com/FelipeRfariasDev/echo/blob/main/vhosts/dummy-host-echo-mvc.example.com-error.log
+    
+    -> https://github.com/FelipeRfariasDev/echo/blob/main/vhosts/dummy-host-echo-mvc.example.com-access.log
