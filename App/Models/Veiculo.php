@@ -94,11 +94,10 @@ class Veiculo extends Connection
             return false;
         }
     }
-    public function update()
+    public function update($id)
     {
         if ($_POST) {
             try {
-                $id = $_POST["id"];
                 $placa = $_POST["placa"];
                 $modelo = $_POST["modelo"];
                 $marca = $_POST["marca"];
@@ -128,10 +127,9 @@ class Veiculo extends Connection
         }
     }
 
-    public function delete()
+    public function delete($id)
     {
         try {
-            $id = $_GET["id"];
             $conn = $this->connect();
             $sql = "DELETE FROM $this->nome_table WHERE (`id` = $id) and usuario_id=$this->login_id";
             $stmt = $conn->prepare($sql);

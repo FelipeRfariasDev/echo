@@ -51,11 +51,11 @@ class VeiculosControllers extends \Controllers
 
     }
 
-    public function alterar()
+    public function alterar($id)
     {
         if ($_POST) {
             $model = new Veiculo();
-            $update = $model->update();
+            $update = $model->update($id);
             if($update["msg_success"]==true){
                 $_SESSION["msgAlteradoSucesso"]=true;
                 self::redirect("/$this->nameController/index");
@@ -65,14 +65,14 @@ class VeiculosControllers extends \Controllers
             }
         }
         $model = new Veiculo();
-        $getById = $model->getById($_GET["id"]);
+        $getById = $model->getById($id);
         return self::view("Auth/$this->nameController/alterar",["getById"=>$getById,"nameController"=>$this->nameController]);
     }
 
-    public function excluir()
+    public function excluir($id=null)
     {
         $model = new Veiculo();
-        $delete = $model->delete();
+        $delete = $model->delete($id);
 
         if($delete["msg_success"]==true){
             $_SESSION["msgRemovidoSucesso"]=true;

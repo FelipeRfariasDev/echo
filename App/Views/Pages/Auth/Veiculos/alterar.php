@@ -10,8 +10,7 @@ include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/Element/nav-menu-autent
     <a style="color: white;" href='/<?php echo $vars["nameController"];?>/index'><span class="btncrud">< Voltar</span></a>
 
 
-<form action="<?php echo $vars["nameController"];?>/alterar" method="POST">
-    <input type="hidden" value="<?php echo $vars["getById"]["id"];?>" name="id">
+<form action="/<?php echo $vars["nameController"];?>/alterar/<?php echo $vars["getById"]["id"];?>" method="POST">
     <section class="formulario">
         <div class="inputs">
             <div class="input-row">
