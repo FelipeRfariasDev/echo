@@ -1,5 +1,11 @@
 # ECHO - GERENCIAMENTO DE FROTAS ECOLÓGICO
 
+
+#### EER
+
+![alt text](https://github.com/FelipeRfariasDev/echo/blob/main/Database/EER/diagrama.PNG?raw=true)
+
+
 git clone https://github.com/LuanODias/Echo-mvc
 
 cd Echo-mvc
@@ -8,7 +14,6 @@ composer install
 
 Em App/Models/Connection.php verfique os dados de conexão com o banco de dados.
 
-![alt text](https://github.com/FelipeRfariasDev/echo/blob/main/Database/EER/diagrama.PNG?raw=true)
 
 Siga os seguintes passos para configurar o vhosts no apache
 
