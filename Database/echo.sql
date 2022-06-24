@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24-Jun-2022 às 00:59
+-- Tempo de geração: 24-Jun-2022 às 17:04
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 7.3.33
 
@@ -45,7 +45,8 @@ INSERT INTO `chamados` (`id`, `km_rodado`, `data`, `funcionario_id`, `veiculo_id
 (13, 100, '2022-06-22', 3, 1, 1, 'N'),
 (15, 150, '2022-06-23', 5, 4, 1, 'N'),
 (16, 250, '2022-06-23', 6, 5, 1, 'S'),
-(17, 300, '2022-06-23', 3, 5, 1, 'N');
+(17, 300, '2022-06-23', 3, 5, 1, 'N'),
+(19, 550, '2022-06-24', 3, 4, 1, 'N');
 
 -- --------------------------------------------------------
 
@@ -124,7 +125,7 @@ INSERT INTO `veiculos` (`id`, `placa`, `modelo`, `marca`, `autonomia`, `usuario_
 --
 ALTER TABLE `chamados`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `kf_veiculo_disponivel` (`disponivel`,`veiculo_id`),
+  ADD UNIQUE KEY `kf_veiculo_disponivel` (`disponivel`,`veiculo_id`,`data`),
   ADD KEY `fk_chamados_funcionarios_idx` (`funcionario_id`),
   ADD KEY `fk_chamados_veiculos_idx` (`veiculo_id`),
   ADD KEY `fk_chamados_usuario_idx` (`usuario_id`);
@@ -161,7 +162,7 @@ ALTER TABLE `veiculos`
 -- AUTO_INCREMENT de tabela `chamados`
 --
 ALTER TABLE `chamados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `funcionarios`
