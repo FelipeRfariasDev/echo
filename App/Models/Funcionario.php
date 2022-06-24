@@ -82,14 +82,12 @@ class Funcionario extends Connection
             return false;
         }
     }
-    public function update()
+    public function update($id)
     {
         if ($_POST) {
             try {
-                $id = $_POST["id"];
                 $nome = $_POST["nome"];
                 $cpf = $_POST["cpf"];
-
                 $conn = $this->connect();
                 $sql = "UPDATE $this->nome_table SET nome = '$nome',cpf = '$cpf',usuario_id=$this->login_id WHERE (`id` = $id)";
                 $stmt = $conn->prepare($sql);
@@ -114,10 +112,9 @@ class Funcionario extends Connection
         }
     }
 
-    public function delete()
+    public function delete($id)
     {
         try {
-            $id = $_GET["id"];
             $conn = $this->connect();
             $sql = "DELETE FROM $this->nome_table WHERE (`id` = $id) and usuario_id=$this->login_id";
             $stmt = $conn->prepare($sql);

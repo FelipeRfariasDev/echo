@@ -54,11 +54,11 @@ class FuncionariosControllers extends \Controllers
 
     }
 
-    public function alterar()
+    public function alterar($id)
     {
         if ($_POST) {
             $model = new Funcionario();
-            $update = $model->update();
+            $update = $model->update($id);
             if($update["msg_success"]==true){
                 $_SESSION["msgAlteradoSucesso"]=true;
                 self::redirect("/$this->nameController/index");
@@ -68,14 +68,14 @@ class FuncionariosControllers extends \Controllers
             }
         }
         $model = new Funcionario();
-        $getById = $model->getById($_GET["id"]);
+        $getById = $model->getById($id);
         return self::view("Auth/$this->nameController/alterar",["getById"=>$getById,"nameController"=>$this->nameController]);
     }
 
-    public function excluir()
+    public function excluir($id)
     {
         $model = new Funcionario();
-        $delete = $model->delete();
+        $delete = $model->delete($id);
         if($delete["msg_success"]==true){
             $_SESSION["msgRemovidoSucesso"]=true;
         }else{
