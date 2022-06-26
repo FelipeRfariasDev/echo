@@ -35,7 +35,7 @@ if (@$_SESSION["msgRemovidoSucesso"] == true) {
 if (@$_SESSION["msgAdicionadoErro"] == true) {
     ?>
     <span class="msg-error">
-        <p><?php print_r($_SESSION["msgAdicionadoErro"][2]);?></p>
+        <p><?php print_r($_SESSION["msgAdicionadoErro"]);?></p>
     </span>
     <?php
     $_SESSION["msgAdicionadoErro"] = false;
@@ -46,7 +46,7 @@ if (@$_SESSION["msgAdicionadoErro"] == true) {
 if (@$_SESSION["msgAlteradoErro"] == true) {
     ?>
     <span class="msg-error">
-            <p><?php print_r($_SESSION["msgAlteradoErro"][2]);?></p>
+            <p><?php print_r($_SESSION["msgAlteradoErro"]);?></p>
         </span>
     <?php
     $_SESSION["msgAlteradoErro"] = false;

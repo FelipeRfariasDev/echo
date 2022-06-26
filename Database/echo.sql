@@ -9,14 +9,12 @@ CREATE TABLE `chamados` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-
 CREATE TABLE `funcionarios` (
                                 `id` int(11) NOT NULL,
                                 `nome` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
                                 `cpf` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
                                 `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 
 
 CREATE TABLE `usuario` (
@@ -27,7 +25,6 @@ CREATE TABLE `usuario` (
                            `senha` varchar(32) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
 CREATE TABLE `veiculos` (
                             `id` int(11) NOT NULL,
                             `placa` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
@@ -37,10 +34,9 @@ CREATE TABLE `veiculos` (
                             `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-
+--
 ALTER TABLE `chamados`
     ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `kf_veiculo_disponivel` (`disponivel`,`veiculo_id`,`data`),
   ADD KEY `fk_chamados_funcionarios_idx` (`funcionario_id`),
   ADD KEY `fk_chamados_veiculos_idx` (`veiculo_id`),
   ADD KEY `fk_chamados_usuario_idx` (`usuario_id`);
@@ -48,46 +44,44 @@ ALTER TABLE `chamados`
 
 ALTER TABLE `funcionarios`
     ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `cpf_UNIQUE` (`cpf`),
-  ADD KEY `fk_funcionarios_usuario1_idx` (`usuario_id`);
+  ADD UNIQUE KEY `CPJ é um campo unico` (`cpf`),
+  ADD KEY `fk_funcionarios_usuario_idx` (`usuario_id`);
 
 
 ALTER TABLE `usuario`
     ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `cnpj_UNIQUE` (`cnpj`),
-  ADD UNIQUE KEY `email_UNIQUE` (`email`);
+  ADD UNIQUE KEY `CNPJ é um campo unico` (`cnpj`),
+  ADD UNIQUE KEY `Email é um campo unico` (`email`);
 
 
 ALTER TABLE `veiculos`
     ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `placa_UNIQUE` (`placa`),
-  ADD KEY `fk_veiculos_usuario1_idx` (`usuario_id`);
+  ADD UNIQUE KEY `Placa é um campo unico` (`placa`),
+  ADD KEY `fk_usuario_idx` (`usuario_id`);
 
 
 ALTER TABLE `chamados`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 
 ALTER TABLE `funcionarios`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-
-ALTER TABLE `usuario`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 ALTER TABLE `veiculos`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 
 ALTER TABLE `chamados`
-    ADD CONSTRAINT `fk_chamados_funcionarios` FOREIGN KEY (`funcionario_id`) REFERENCES `funcionarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_chamados_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_chamados_veiculos` FOREIGN KEY (`veiculo_id`) REFERENCES `veiculos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT `fk_chamados_funcionarios` FOREIGN KEY (`funcionario_id`) REFERENCES `funcionarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_chamados_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_chamados_veiculos` FOREIGN KEY (`veiculo_id`) REFERENCES `veiculos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
 ALTER TABLE `funcionarios`
-    ADD CONSTRAINT `fk_funcionarios_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT `fk_funcionarios_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 
 ALTER TABLE `veiculos`
-    ADD CONSTRAINT `fk_veiculos_usuario1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ADD CONSTRAINT `fk_veiculos_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;

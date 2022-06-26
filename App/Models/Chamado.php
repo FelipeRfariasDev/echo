@@ -41,6 +41,14 @@ class Chamado extends Connection
         }
     }
 
+    private function getVeiculoDisponivel($veiculo_id){
+        $conn = $this->connect();
+        $sql = "SELECT * FROM $this->nome_table WHERE (veiculo_id=$veiculo_id)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
     public function novo()
     {
         if ($_POST) {
@@ -49,6 +57,16 @@ class Chamado extends Connection
                 $funcionario_id = $_POST["funcionario_id"];
                 $veiculo_id = $_POST["veiculo_id"];
                 $data = date("Y-m-d");
+
+                /*
+                $getVeiculoDisponivel = $this->getVeiculoDisponivel($veiculo_id);
+
+                if($getVeiculoDisponivel["data"]==$data && $getVeiculoDisponivel["disponivel"]=='N'){
+                    return[
+                        "msg_success"=>false,
+                        "msg_erros"=>"Esse veículo não está disponível"
+                    ];
+                }*/
 
                 $conn = $this->connect();
                 $sql = "INSERT INTO $this->nome_table (`km_rodado`,`funcionario_id`,veiculo_id,data,`usuario_id`) VALUES ('$km_rodado','$funcionario_id','$veiculo_id','$data',$this->login_id)";
@@ -94,6 +112,18 @@ class Chamado extends Connection
                 $funcionario_id = $_POST["funcionario_id"];
                 $veiculo_id = $_POST["veiculo_id"];
                 $disponivel = $_POST["disponivel"];
+                /*
+                    $getVeiculoDisponivel = $this->getVeiculoDisponivel($veiculo_id);
+                    $data = date("Y-m-d");
+
+
+                    if($getVeiculoDisponivel["data"]==$data && $getVeiculoDisponivel["disponivel"]=='N'){
+                        return[
+                            "msg_success"=>false,
+                            "msg_erros"=>"Esse veículo não está disponível"
+                        ];
+                    }
+                */
 
                 $conn = $this->connect();
                 $sql = "UPDATE $this->nome_table SET km_rodado = '$km_rodado',funcionario_id = '$funcionario_id',veiculo_id='$veiculo_id',usuario_id=$this->login_id,disponivel='$disponivel' WHERE (`id` = $id)";
