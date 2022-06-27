@@ -50,6 +50,18 @@ class Chamado extends Connection
                 $veiculo_id = $_POST["veiculo_id"];
                 $data = date("Y-m-d");
 
+                /*
+                    Existe algum registro na tabela de chamados?
+                    Se sim então verifica se o veiculo_id está disponivel='S',
+                        então se existe e está disponivel então deixa inserir
+                    else
+                        return[
+                            "msg_success"=>false,
+                            "msg_erros"=>"Veiculo não está disponível para uso"
+                        ];
+
+                */
+
                 $conn = $this->connect();
                 $sql = "INSERT INTO $this->nome_table (`km_rodado`,`funcionario_id`,veiculo_id,data,`usuario_id`,disponivel) VALUES ('$km_rodado','$funcionario_id','$veiculo_id','$data',$this->login_id,'N')";
                 $stmt = $conn->prepare($sql);
