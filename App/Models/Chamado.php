@@ -51,7 +51,7 @@ class Chamado extends Connection
                 $data = date("Y-m-d");
 
                 $conn = $this->connect();
-                $sql = "INSERT INTO $this->nome_table (`km_rodado`,`funcionario_id`,veiculo_id,data,`usuario_id`) VALUES ('$km_rodado','$funcionario_id','$veiculo_id','$data',$this->login_id)";
+                $sql = "INSERT INTO $this->nome_table (`km_rodado`,`funcionario_id`,veiculo_id,data,`usuario_id`,disponivel) VALUES ('$km_rodado','$funcionario_id','$veiculo_id','$data',$this->login_id,'N')";
                 $stmt = $conn->prepare($sql);
                 $sucesso = $stmt->execute();
                 if (!$sucesso) {
