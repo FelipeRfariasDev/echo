@@ -57,9 +57,11 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                     <td><?php echo $linha["placa"]; ?></td>
                     <td><?php echo $linha["disponivel"]; ?></td>
                     <td>
+                        <?php if($linha["disponivel"]=="N"){?>
                         <div class="ud">
-                        <a href='/<?php echo $vars["nameController"];?>/alterar/<?php echo $linha["id"]; ?>'><img style="width: 56px; height: 56px;" src="/public/assets/svg/edit.svg" alt=""></a>
+                        <a href='/<?php echo $vars["nameController"];?>/alterar_disponivel/<?php echo $linha["id"]; ?>'>Alterar para Disponível</a>
                         </div>
+                        <?php } ?>
                     </td>
                 </tr>
             <?php endforeach;

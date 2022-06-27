@@ -69,36 +69,14 @@ class ChamadosControllers extends \Controllers
                 "getFuncionarios"=>$modelFuncionario->index(),
                 "nameController"=>$this->nameController
             ]);
-
-
     }
 
-    public function alterar($id)
+    public function alterar_disponivel($id)
     {
-        if ($_POST) {
-            $model = new Chamado();
-            $update = $model->update($id);
-            if($update["msg_success"]==true){
-                $_SESSION["msgAlteradoSucesso"]=true;
-                self::redirect("/$this->nameController/index");
-            }else{
-                $_SESSION["msgAlteradoErro"]=$update["msg_erros"];
-                self::redirect("/$this->nameController/index");
-            }
-        }
         $model = new Chamado();
-        $getById = $model->getById($id);
-
-        $modelVeiculo = new Veiculo();
-        $modelFuncionario = new Funcionario();
-
-        return self::view(
-            "Auth/$this->nameController/alterar",
-            [
-                "getVeiculos"=>$modelVeiculo->index(),
-                "getFuncionarios"=>$modelFuncionario->index(),
-                "getById"=>$getById,
-                "nameController"=>$this->nameController
-            ]);
+        if($model->alterar_disponivel($id)){
+            $_SESSION["msgAlteradoSucesso"]=true;
+            self::redirect("/$this->nameController/index");
+        }
     }
 }
