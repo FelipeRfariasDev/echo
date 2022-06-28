@@ -44,56 +44,65 @@ class Chamado extends Connection
     public function novo()
     {
         if ($_POST) {
-            try {
-                $km_rodado = $_POST["km_rodado"];
-                $funcionario_id = $_POST["funcionario_id"];
-                $veiculo_id = $_POST["veiculo_id"];
-                $data = date("Y-m-d");
+            $km_rodado = $_POST["km_rodado"];
+            $funcionario_id = $_POST["funcionario_id"];
+            $veiculo_id = $_POST["veiculo_id"];
+            $data = date("Y-m-d");
 
-                $getExisteAlgumVeiculoChamados = $this->getExisteAlgumVeiculoChamados($veiculo_id);
-                if($getExisteAlgumVeiculoChamados==true){
-                    $getExisteAlgumVeiculoChamadosDisponivel = $this->getExisteAlgumVeiculoChamadosDisponivel($veiculo_id);
-                    if($getExisteAlgumVeiculoChamadosDisponivel==false){
 
-                    }else{
-                        return[
-                            "msg_success"=>false,
-                            "msg_erros"=>"Veiculo não está disponível para uso"
-                        ];
-                    }
+            /* Existe algum veiculo cadastrado em chamados com veiculo_id? */
+            $getExisteAlgumVeiculoChamados = $this->getExisteAlgumVeiculoChamados($veiculo_id);
 
-                }
+            if($getExisteAlgumVeiculoChamados==1){
+                $this->insert($km_rodado,$funcionario_id,$veiculo_id,$data);
+                return[
+                    "msg_success"=>true
+                ];
+            }
 
-                $conn = $this->connect();
-                $sql = "INSERT INTO $this->nome_table (`km_rodado`,`funcionario_id`,veiculo_id,data,`usuario_id`,disponivel) VALUES ('$km_rodado','$funcionario_id','$veiculo_id','$data',$this->login_id,'N')";
-                $stmt = $conn->prepare($sql);
-                $sucesso = $stmt->execute();
-                if (!$sucesso) {
-                    return[
-                        "msg_success"=>false,
-                        "msg_erros"=>$stmt->errorInfo()
-                    ];
-
-                }else{
-                    return[
-                        "msg_success"=>true
-                    ];
-                }
-            } catch (PDOException $e) {
+            /* Existe algum veiculo cadastrado em chamados com veiculo_id (Disponivel)? */
+            $getExisteAlgumVeiculoChamadosDisponivel = $this->getExisteAlgumVeiculoChamadosDisponivel($veiculo_id);
+            if($getExisteAlgumVeiculoChamadosDisponivel==1){
                 return[
                     "msg_success"=>false,
-                    "msg_erros"=>$e->getMessage()
+                    "msg_erros"=>"Esse Veículo não está disponível"
                 ];
             }
         }
     }
 
+    private function insert($km_rodado,$funcionario_id,$veiculo_id,$data){
+        try {
+
+            $conn = $this->connect();
+            $sql = "INSERT INTO $this->nome_table (`km_rodado`,`funcionario_id`,veiculo_id,data,`usuario_id`,disponivel) VALUES ('$km_rodado','$funcionario_id','$veiculo_id','$data',$this->login_id,'N')";
+            $stmt = $conn->prepare($sql);
+            $sucesso = $stmt->execute();
+            if (!$sucesso) {
+                return[
+                    "msg_success"=>false,
+                    "msg_erros"=>$stmt->errorInfo()
+                ];
+
+            }else{
+                return[
+                    "msg_success"=>true
+                ];
+            }
+        } catch (PDOException $e) {
+            return[
+            "msg_success"=>false,
+            "msg_erros"=>$e->getMessage()
+            ];
+        }
+    }
+
     private function getExisteAlgumVeiculoChamadosDisponivel($veiculo_id){
         $conn = $this->connect();
-        $sql = "SELECT id FROM $this->nome_table where veiculo_id=$veiculo_id and disponivel='S'";
+        $sql = "SELECT id FROM $this->nome_table where veiculo_id=$veiculo_id and disponivel='N'";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->rowCount();
     }
 
     private function getExisteAlgumVeiculoChamados($veiculo_id){
@@ -101,7 +110,7 @@ class Chamado extends Connection
         $sql = "SELECT id FROM $this->nome_table where veiculo_id=$veiculo_id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->rowCount();
     }
 
     public function getVeiculosDisponiveis(){
@@ -115,6 +124,13 @@ class Chamado extends Connection
     public function alterar_disponivel($id){
         $conn = $this->connect();
         $sql = "UPDATE $this->nome_table SET disponivel='S' WHERE id=$id";
+        $stmt = $conn->prepare($sql);
+        return $stmt->execute();
+    }
+
+    public function alterar_indisponivel($id){
+        $conn = $this->connect();
+        $sql = "UPDATE $this->nome_table SET disponivel='N' WHERE id=$id";
         $stmt = $conn->prepare($sql);
         return $stmt->execute();
     }

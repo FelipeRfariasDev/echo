@@ -79,4 +79,13 @@ class ChamadosControllers extends \Controllers
             self::redirect("/$this->nameController/index");
         }
     }
+
+    public function alterar_indisponivel($id)
+    {
+        $model = new Chamado();
+        if($model->alterar_indisponivel($id)){
+            $_SESSION["msgAlteradoSucesso"]=true;
+            self::redirect("/$this->nameController/index");
+        }
+    }
 }

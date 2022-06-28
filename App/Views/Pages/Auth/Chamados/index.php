@@ -59,8 +59,12 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                     <td>
                         <?php if($linha["disponivel"]=="N"){?>
                         <div class="ud">
-                        <a href='/<?php echo $vars["nameController"];?>/alterar_disponivel/<?php echo $linha["id"]; ?>'>Alterar para Disponível</a>
+                            <a href='/<?php echo $vars["nameController"];?>/alterar_disponivel/<?php echo $linha["id"]; ?>'>Alterar para Disponível</a>
                         </div>
+                        <?php }else{ ?>
+                            <div class="ud">
+                                <a href='/<?php echo $vars["nameController"];?>/alterar_indisponivel/<?php echo $linha["id"]; ?>'>Alterar para InDisponível</a>
+                            </div>
                         <?php } ?>
                     </td>
                 </tr>
