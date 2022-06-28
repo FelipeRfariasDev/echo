@@ -11,9 +11,10 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
             <label for="">Tipo</label>
             <select name="tipo_relatorio" required>
                 <option value="">Selecione</option>
-                <option value="km_rodado_veiculo">KM Rodado Veiculo</option>
+                <option value="co2veiculo">Co2 Veiculo</option>
                 <option value="consumo_veiculo_funcionario">Consumo de Veiculo por Funcionário</option>
                 <option value="consumo_km_funcionario">Consumo KM por Funcionário</option>
+                <option value="km_rodado_veiculo">KM Rodado Veiculo</option>
             </select>
             <?php
             $data_inicio = new DateTime("-31 days");

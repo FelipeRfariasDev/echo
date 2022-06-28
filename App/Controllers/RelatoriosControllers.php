@@ -70,4 +70,18 @@ class RelatoriosControllers extends \Controllers
             ]
         );
     }
+
+    public function co2veiculo($data_inicio,$data_fim){
+        $getData = $this->modelRelatorio->co2veiculo($data_inicio,$data_fim);
+        $getIntervaloData = ["inicio"=>$data_inicio,"fim"=>$data_fim];
+
+        return self::view(
+            "Auth/$this->nameController/co2veiculo",
+            [
+                "nameController"=>$this->nameController,
+                "getData"=>$getData,
+                "getIntervaloData"=>$getIntervaloData
+            ]
+        );
+    }
 }
