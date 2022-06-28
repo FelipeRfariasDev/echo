@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Jun-2022 às 09:31
+-- Tempo de geração: 28-Jun-2022 às 12:41
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 7.3.33
 
@@ -76,7 +76,8 @@ CREATE TABLE `veiculos` (
   `modelo` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `marca` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `autonomia` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `usuario_id` int(11) NOT NULL
+  `usuario_id` int(11) NOT NULL,
+  `disponivel` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'S'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
