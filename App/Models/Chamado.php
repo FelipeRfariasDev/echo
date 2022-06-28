@@ -50,17 +50,19 @@ class Chamado extends Connection
                 $veiculo_id = $_POST["veiculo_id"];
                 $data = date("Y-m-d");
 
-                /*
-                    Existe algum registro na tabela de chamados?
-                    Se sim então verifica se o veiculo_id está disponivel='S',
-                        então se existe e está disponivel então deixa inserir
-                    else
+                $getExisteAlgumVeiculoChamados = $this->getExisteAlgumVeiculoChamados($veiculo_id);
+                if($getExisteAlgumVeiculoChamados==true){
+                    $getExisteAlgumVeiculoChamadosDisponivel = $this->getExisteAlgumVeiculoChamadosDisponivel($veiculo_id);
+                    if($getExisteAlgumVeiculoChamadosDisponivel==false){
+
+                    }else{
                         return[
                             "msg_success"=>false,
                             "msg_erros"=>"Veiculo não está disponível para uso"
                         ];
+                    }
 
-                */
+                }
 
                 $conn = $this->connect();
                 $sql = "INSERT INTO $this->nome_table (`km_rodado`,`funcionario_id`,veiculo_id,data,`usuario_id`,disponivel) VALUES ('$km_rodado','$funcionario_id','$veiculo_id','$data',$this->login_id,'N')";
@@ -84,6 +86,22 @@ class Chamado extends Connection
                 ];
             }
         }
+    }
+
+    private function getExisteAlgumVeiculoChamadosDisponivel($veiculo_id){
+        $conn = $this->connect();
+        $sql = "SELECT id FROM $this->nome_table where veiculo_id=$veiculo_id and disponivel='S'";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    private function getExisteAlgumVeiculoChamados($veiculo_id){
+        $conn = $this->connect();
+        $sql = "SELECT id FROM $this->nome_table where veiculo_id=$veiculo_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     public function getVeiculosDisponiveis(){
