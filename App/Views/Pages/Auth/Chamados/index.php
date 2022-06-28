@@ -39,6 +39,7 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
     <?php if (!empty($vars["getData"])) { ?>
         <table>
             <tr>
+                <th>Id</th>
                 <th>Km rodado</th>
                 <th>Data</th>
                 <th>Co2</th>
@@ -48,29 +49,36 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                 <th></th>
             </tr>
             <?php
-            foreach ($vars["getData"] as $linha) : ?>
+            foreach ($vars["getData"] as $linha) { ?>
                 <tr>
+                    <td><?php echo $linha["chamados_id"]; ?></td>
                     <td><?php echo $linha["km_rodado"]; ?></td>
                     <td><?php echo date_format(date_create($linha["data"]), 'd/m/Y'); ?></td>
                     <td><?php echo ($linha["km_rodado"]* 0.75 * 3.7); ?> kg</td>
                     <td><?php echo $linha["nome"] ?></td>
                     <td><?php echo $linha["placa"]; ?></td>
-                    <td><?php echo $linha["disponivel"]; ?></td>
                     <td>
-                        <?php if($linha["disponivel"]=="N"){?>
-                        <div class="ud">
-                            <a href='/<?php echo $vars["nameController"];?>/alterar_disponivel/<?php echo $linha["id"]; ?>'>Alterar para Disponível</a>
-                        </div>
+                        <?php
+                        if($linha["veiculos_disponivel"]=="S" && $linha["chamados_disponivel"]=="S"){
+                            echo "S";
+                        }else{
+                            echo "N";
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <?php if($linha["veiculos_disponivel"]=="N" && $linha["chamados_disponivel"]=="N"){?>
+                            <div class="ud">
+                                <a href='/<?php echo $vars["nameController"];?>/alterar_disponivel/<?php echo $linha["chamados_id"]; ?>/<?php echo $linha["veiculo_id"]; ?>'>Alterar para Disponível</a>
+                            </div>
                         <?php }else{ ?>
                             <div class="ud">
-                                <a href='/<?php echo $vars["nameController"];?>/alterar_indisponivel/<?php echo $linha["id"]; ?>'>Alterar para InDisponível</a>
+                                <a href='/<?php echo $vars["nameController"];?>/alterar_indisponivel/<?php echo $linha["chamados_id"]; ?>/<?php echo $linha["veiculo_id"]; ?>'>Alterar para InDisponível</a>
                             </div>
                         <?php } ?>
                     </td>
                 </tr>
-            <?php endforeach;
-            ?>
-
+            <?php } ?>
         </table>
     <?php } else { ?>
         <h3 style="text-align: center; font-size: 30px; color: #6D995D;">Resultado da busca: Nenhum registro cadastrado</h3>

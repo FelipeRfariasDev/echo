@@ -27,6 +27,9 @@ include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/Element/nav-menu-autent
 
                 <label for="">Autonomia</label>
                 <input autocomplete="off" name="autonomia" type="text" required value="<?php echo $vars["getById"]["autonomia"];?>" placeholder="Digite uma Autonomia para cadastrar na tabela">
+
+                <label for="">Disponível</label>
+                <input autocomplete="off" name="disponivel" type="text" required value="<?php echo $vars["getById"]["disponivel"];?>" placeholder="Digite se está disponivel para cadastrar na tabela">
             </div>
         </div>
         <input type="submit" value="Alterar" class="btncrud" />

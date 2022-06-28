@@ -15,11 +15,7 @@ class Chamado extends Connection
     public function index($km_rodado=null,$funcionario_id=null,$veiculo_id=null)
     {
         $conn = $this->connect();
-        $sql = "SELECT $this->nome_table.id,$this->nome_table.disponivel,$this->nome_table.km_rodado,$this->nome_table.data,veiculos.placa,funcionarios.nome,funcionarios.cpf
-            FROM $this->nome_table 
-            JOIN veiculos ON (veiculos.id=$this->nome_table.veiculo_id) 
-            JOIN funcionarios ON (funcionarios.id=$this->nome_table.funcionario_id) 
-         WHERE $this->nome_table.`usuario_id`=$this->login_id";
+        $sql = "SELECT veiculos.id as veiculo_id,chamados.id as chamados_id,chamados.km_rodado,chamados.data,veiculos.placa,funcionarios.nome,funcionarios.cpf,veiculos.disponivel as veiculos_disponivel,chamados.disponivel as chamados_disponivel FROM chamados JOIN veiculos ON (veiculos.id=chamados.veiculo_id) JOIN funcionarios ON (funcionarios.id=chamados.funcionario_id) WHERE chamados.`usuario_id`=$this->login_id";
 
         if(!empty($km_rodado)){
             $sql .=" AND nome='$km_rodado'";
@@ -30,7 +26,7 @@ class Chamado extends Connection
         if(!empty($veiculo_id)){
             $sql .=" AND veiculo_id='$veiculo_id'";
         }
-
+        //echo $sql;
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -41,6 +37,15 @@ class Chamado extends Connection
         }
     }
 
+    public function getVeiculoDisponivel($veiculo_id){
+        $conn = $this->connect();
+        $sql = "SELECT count(id) as qtd FROM veiculos where id=$veiculo_id and disponivel='S'";
+        //echo $sql;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function novo()
     {
         if ($_POST) {
@@ -49,20 +54,16 @@ class Chamado extends Connection
             $veiculo_id = $_POST["veiculo_id"];
             $data = date("Y-m-d");
 
+            $getVeiculoDisponivel = $this->getVeiculoDisponivel($veiculo_id);
+            $qtdDisponivel = ($getVeiculoDisponivel[0]["qtd"]);
 
-            /* Existe algum veiculo cadastrado em chamados com veiculo_id? */
-            $getExisteAlgumVeiculoChamados = $this->getExisteAlgumVeiculoChamados($veiculo_id);
+            if($qtdDisponivel==1){
 
-            if($getExisteAlgumVeiculoChamados==1){
                 $this->insert($km_rodado,$funcionario_id,$veiculo_id,$data);
                 return[
                     "msg_success"=>true
                 ];
-            }
-
-            /* Existe algum veiculo cadastrado em chamados com veiculo_id (Disponivel)? */
-            $getExisteAlgumVeiculoChamadosDisponivel = $this->getExisteAlgumVeiculoChamadosDisponivel($veiculo_id);
-            if($getExisteAlgumVeiculoChamadosDisponivel==1){
+            }else{
                 return[
                     "msg_success"=>false,
                     "msg_erros"=>"Esse Veículo não está disponível"
@@ -75,19 +76,26 @@ class Chamado extends Connection
         try {
 
             $conn = $this->connect();
-            $sql = "INSERT INTO $this->nome_table (`km_rodado`,`funcionario_id`,veiculo_id,data,`usuario_id`,disponivel) VALUES ('$km_rodado','$funcionario_id','$veiculo_id','$data',$this->login_id,'N')";
+            $sql = "INSERT INTO chamados (`km_rodado`,`funcionario_id`,veiculo_id,data,`usuario_id`,disponivel) VALUES ('$km_rodado','$funcionario_id','$veiculo_id','$data',$this->login_id,'N')";
+            //echo $sql;
             $stmt = $conn->prepare($sql);
-            $sucesso = $stmt->execute();
-            if (!$sucesso) {
+            if (!$stmt->execute()) {
                 return[
                     "msg_success"=>false,
                     "msg_erros"=>$stmt->errorInfo()
                 ];
 
             }else{
-                return[
-                    "msg_success"=>true
-                ];
+                $conn = $this->connect();
+                $sql = "UPDATE veiculos SET disponivel='N' WHERE id=$veiculo_id";
+                //echo $sql;
+                //exit;
+                $stmt = $conn->prepare($sql);
+                if($stmt->execute()){
+                    return[
+                        "msg_success"=>true
+                    ];
+                }
             }
         } catch (PDOException $e) {
             return[
@@ -97,41 +105,27 @@ class Chamado extends Connection
         }
     }
 
-    private function getExisteAlgumVeiculoChamadosDisponivel($veiculo_id){
+    public function alterar_disponivel($chamados_id,$veiculo_id){
         $conn = $this->connect();
-        $sql = "SELECT id FROM $this->nome_table where veiculo_id=$veiculo_id and disponivel='N'";
+        $sql = "UPDATE veiculos SET disponivel='S' WHERE id=$veiculo_id";
         $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->rowCount();
+        if($stmt->execute()){
+            $conn = $this->connect();
+            $sql = "UPDATE chamados SET disponivel='S' WHERE id=$chamados_id";
+            $stmt = $conn->prepare($sql);
+            return $stmt->execute();
+        }
     }
 
-    private function getExisteAlgumVeiculoChamados($veiculo_id){
+    public function alterar_indisponivel($chamados_id,$veiculo_id){
         $conn = $this->connect();
-        $sql = "SELECT id FROM $this->nome_table where veiculo_id=$veiculo_id";
+        $sql = "UPDATE veiculos SET disponivel='N' WHERE id=$veiculo_id";
         $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->rowCount();
-    }
-
-    public function getVeiculosDisponiveis(){
-        $conn = $this->connect();
-        $sql = "SELECT id,placa,marca,modelo FROM veiculos where id in (SELECT veiculo_id FROM chamados where disponivel='S')";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-    public function alterar_disponivel($id){
-        $conn = $this->connect();
-        $sql = "UPDATE $this->nome_table SET disponivel='S' WHERE id=$id";
-        $stmt = $conn->prepare($sql);
-        return $stmt->execute();
-    }
-
-    public function alterar_indisponivel($id){
-        $conn = $this->connect();
-        $sql = "UPDATE $this->nome_table SET disponivel='N' WHERE id=$id";
-        $stmt = $conn->prepare($sql);
-        return $stmt->execute();
+        if($stmt->execute()){
+            $conn = $this->connect();
+            $sql = "UPDATE chamados SET disponivel='N' WHERE id=$chamados_id";
+            $stmt = $conn->prepare($sql);
+            return $stmt->execute();
+        }
     }
 }

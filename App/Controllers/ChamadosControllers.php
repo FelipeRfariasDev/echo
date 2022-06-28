@@ -33,14 +33,14 @@ class ChamadosControllers extends \Controllers
             }
         }
 
-        $model = new Chamado();
-        $modelVeiculo = new Veiculo();
+        $modelChamado = new Chamado();
         $modelFuncionario = new Funcionario();
+        $modelVeiculo = new Veiculo();
 
         return self::view(
             "Auth/$this->nameController/index",
             [
-                "getData"=>$model->index($km_rodado,$funcionario_id,$veiculo_id),
+                "getData"=>$modelChamado->index(),
                 "getVeiculos"=>$modelVeiculo->index(),
                 "getFuncionarios"=>$modelFuncionario->index(),
                 "nameController"=>$this->nameController
@@ -71,19 +71,19 @@ class ChamadosControllers extends \Controllers
             ]);
     }
 
-    public function alterar_disponivel($id)
+    public function alterar_disponivel($chamados_id,$veiculo_id)
     {
         $model = new Chamado();
-        if($model->alterar_disponivel($id)){
+        if($model->alterar_disponivel($chamados_id,$veiculo_id)){
             $_SESSION["msgAlteradoSucesso"]=true;
             self::redirect("/$this->nameController/index");
         }
     }
 
-    public function alterar_indisponivel($id)
+    public function alterar_indisponivel($chamados_id,$veiculo_id)
     {
         $model = new Chamado();
-        if($model->alterar_indisponivel($id)){
+        if($model->alterar_indisponivel($chamados_id,$veiculo_id)){
             $_SESSION["msgAlteradoSucesso"]=true;
             self::redirect("/$this->nameController/index");
         }
