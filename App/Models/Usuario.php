@@ -15,7 +15,7 @@ class Usuario extends Connection{
 
                 $conn = $this->connect();
 
-                $sql = "insert into usuario values(default, :cnpj, :razao_social, :email, :senha)";
+                $sql = "insert into usuarios values(default, :cnpj, :razao_social, :email, :senha)";
 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':cnpj', $cnpj);
@@ -48,7 +48,7 @@ class Usuario extends Connection{
         $senha = md5($_POST["senha"]);
 
         $conn = $this->connect();
-        $sql = "select id,cnpj,razao_social,email from usuario where email = '$email' and senha = '$senha'";
+        $sql = "select id,cnpj,razao_social,email from usuarios where email = '$email' and senha = '$senha'";
         $stmt = $conn->prepare($sql);
         $sucesso = $stmt->execute();
         if (!$sucesso) {

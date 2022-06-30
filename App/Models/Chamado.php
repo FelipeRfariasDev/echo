@@ -15,7 +15,22 @@ class Chamado extends Connection
     public function index($km_rodado=null,$funcionario_id=null,$veiculo_id=null)
     {
         $conn = $this->connect();
-        $sql = "SELECT veiculos.id as veiculo_id,chamados.id as chamados_id,chamados.km_rodado,chamados.data,veiculos.placa,funcionarios.nome,funcionarios.cpf,veiculos.disponivel as veiculos_disponivel,chamados.disponivel as chamados_disponivel FROM chamados JOIN veiculos ON (veiculos.id=chamados.veiculo_id) JOIN funcionarios ON (funcionarios.id=chamados.funcionario_id) WHERE chamados.`usuario_id`=$this->login_id";
+        $sql = "SELECT 
+                    chamados.id,
+                    chamados.km_rodado,
+                    chamados.data,
+                    veiculos.placa,
+                    veiculos.marca,
+                    veiculos.modelo,
+                    funcionarios.nome,
+                    funcionarios.cpf
+                FROM
+                    chamados
+                        JOIN
+                    veiculos ON (veiculos.id = chamados.veiculo_id)
+                        JOIN
+                    funcionarios ON (funcionarios.id = chamados.funcionario_id) 
+                WHERE chamados.`usuario_id`=$this->login_id";
 
         if(!empty($km_rodado)){
             $sql .=" AND nome='$km_rodado'";
@@ -26,7 +41,6 @@ class Chamado extends Connection
         if(!empty($veiculo_id)){
             $sql .=" AND veiculo_id='$veiculo_id'";
         }
-        //echo $sql;
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -37,15 +51,6 @@ class Chamado extends Connection
         }
     }
 
-    public function getVeiculoDisponivel($veiculo_id){
-        $conn = $this->connect();
-        $sql = "SELECT count(id) as qtd FROM veiculos where id=$veiculo_id and disponivel='S'";
-        //echo $sql;
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
     public function novo()
     {
         if ($_POST) {
@@ -54,78 +59,95 @@ class Chamado extends Connection
             $veiculo_id = $_POST["veiculo_id"];
             $data = date("Y-m-d");
 
-            $getVeiculoDisponivel = $this->getVeiculoDisponivel($veiculo_id);
-            $qtdDisponivel = ($getVeiculoDisponivel[0]["qtd"]);
-
-            if($qtdDisponivel==1){
-
-                $this->insert($km_rodado,$funcionario_id,$veiculo_id,$data);
-                return[
-                    "msg_success"=>true
-                ];
-            }else{
+            try {
+                $conn = $this->connect();
+                $sql = "INSERT INTO chamados (`km_rodado`,`funcionario_id`,veiculo_id,data,`usuario_id`) VALUES ('$km_rodado','$funcionario_id','$veiculo_id','$data',$this->login_id)";
+                $stmt = $conn->prepare($sql);
+                if ($stmt->execute()) {
+                    return[
+                        "msg_success"=>true
+                    ];
+                }else{
+                    return[
+                        "msg_success"=>false,
+                        "msg_erros"=>$stmt->errorInfo()
+                    ];
+                }
+            } catch (PDOException $e) {
                 return[
                     "msg_success"=>false,
-                    "msg_erros"=>"Esse Veículo não está disponível"
+                    "msg_erros"=>$e->getMessage()
                 ];
             }
         }
     }
 
-    private function insert($km_rodado,$funcionario_id,$veiculo_id,$data){
-        try {
+    public function getById($id)
+    {
+        $conn = $this->connect();
+        $sql = "select * from $this->nome_table where id=$id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        if ($result == true) {
+            return $result;
+        }else{
+            return false;
+        }
+    }
+    public function update($id)
+    {
+        if ($_POST) {
+            try {
+                $km_rodado = $_POST["km_rodado"];
+                $funcionario_id = $_POST["funcionario_id"];
+                $veiculo_id = $_POST["veiculo_id"];
+                $data = date("Y-m-d");
 
-            $conn = $this->connect();
-            $sql = "INSERT INTO chamados (`km_rodado`,`funcionario_id`,veiculo_id,data,`usuario_id`,disponivel) VALUES ('$km_rodado','$funcionario_id','$veiculo_id','$data',$this->login_id,'N')";
-            //echo $sql;
-            $stmt = $conn->prepare($sql);
-            if (!$stmt->execute()) {
-                return[
-                    "msg_success"=>false,
-                    "msg_erros"=>$stmt->errorInfo()
-                ];
-
-            }else{
                 $conn = $this->connect();
-                $sql = "UPDATE veiculos SET disponivel='N' WHERE id=$veiculo_id";
-                //echo $sql;
-                //exit;
+                $sql = "UPDATE $this->nome_table SET km_rodado = '$km_rodado',funcionario_id = '$funcionario_id',veiculo_id = '$veiculo_id',data = '$data',usuario_id=$this->login_id WHERE (`id` = $id)";
                 $stmt = $conn->prepare($sql);
-                if($stmt->execute()){
+                $sucesso = $stmt->execute();
+                if (!$sucesso) {
+                    return[
+                        "msg_success"=>false,
+                        "msg_erros"=>$stmt->errorInfo()
+                    ];
+                }else{
                     return[
                         "msg_success"=>true
                     ];
                 }
+                return true;
+            } catch (PDOException $e) {
+                return[
+                    "msg_success"=>false,
+                    "msg_erros"=>$e->getMessage()
+                ];
+            }
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $conn = $this->connect();
+            $sql = "DELETE FROM $this->nome_table WHERE (`id` = $id) and usuario_id=$this->login_id";
+            $stmt = $conn->prepare($sql);
+            $sucesso = $stmt->execute();
+            if (!$sucesso) {
+                return[
+                    "msg_success"=>false,
+                    "msg_erros"=>$stmt->errorInfo()
+                ];
+            }else{
+                return true;
             }
         } catch (PDOException $e) {
             return[
-            "msg_success"=>false,
-            "msg_erros"=>$e->getMessage()
+                "msg_success"=>false,
+                "msg_erros"=>$e->getMessage()
             ];
-        }
-    }
-
-    public function alterar_disponivel($chamados_id,$veiculo_id){
-        $conn = $this->connect();
-        $sql = "UPDATE veiculos SET disponivel='S' WHERE id=$veiculo_id";
-        $stmt = $conn->prepare($sql);
-        if($stmt->execute()){
-            $conn = $this->connect();
-            $sql = "UPDATE chamados SET disponivel='S' WHERE id=$chamados_id";
-            $stmt = $conn->prepare($sql);
-            return $stmt->execute();
-        }
-    }
-
-    public function alterar_indisponivel($chamados_id,$veiculo_id){
-        $conn = $this->connect();
-        $sql = "UPDATE veiculos SET disponivel='N' WHERE id=$veiculo_id";
-        $stmt = $conn->prepare($sql);
-        if($stmt->execute()){
-            $conn = $this->connect();
-            $sql = "UPDATE chamados SET disponivel='N' WHERE id=$chamados_id";
-            $stmt = $conn->prepare($sql);
-            return $stmt->execute();
         }
     }
 }

@@ -1,140 +1,85 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Tempo de geração: 28-Jun-2022 às 12:41
--- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 7.3.33
+-- MySQL Workbench Synchronization
+-- Generated: 2022-06-30 10:44
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: Felipe
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+CREATE TABLE IF NOT EXISTS `echo`.`chamados` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `km_rodado` DOUBLE NOT NULL,
+  `data` DATE NOT NULL,
+  `funcionario_id` INT(11) NOT NULL,
+  `veiculo_id` INT(11) NOT NULL,
+  `usuario_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_chamados_funcionarios_idx` (`funcionario_id` ASC),
+  INDEX `fk_chamados_veiculos_idx` (`veiculo_id` ASC),
+  INDEX `fk_chamados_usuario_idx` (`usuario_id` ASC),
+  CONSTRAINT `fk_chamados_funcionarios`
+    FOREIGN KEY (`funcionario_id`)
+    REFERENCES `echo`.`funcionarios` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_chamados_usuario`
+    FOREIGN KEY (`usuario_id`)
+    REFERENCES `echo`.`usuarios` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_chamados_veiculos`
+    FOREIGN KEY (`veiculo_id`)
+    REFERENCES `echo`.`veiculos` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `echo`.`funcionarios` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
+  `cpf` VARCHAR(45) NOT NULL,
+  `usuario_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `CPJ é um campo unico` (`cpf` ASC),
+  INDEX `fk_funcionarios_usuario_idx` (`usuario_id` ASC),
+  CONSTRAINT `fk_funcionarios_usuario`
+    FOREIGN KEY (`usuario_id`)
+    REFERENCES `echo`.`usuarios` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+CREATE TABLE IF NOT EXISTS `echo`.`usuarios` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `cnpj` VARCHAR(18) NOT NULL,
+  `razao_social` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `senha` VARCHAR(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `CNPJ é um campo unico` (`cnpj` ASC),
+  UNIQUE INDEX `Email é um campo unico` (`email` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
---
--- Banco de dados: `echo`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `chamados`
---
-
-CREATE TABLE `chamados` (
-  `id` int(11) NOT NULL,
-  `km_rodado` double NOT NULL,
-  `data` date NOT NULL,
-  `funcionario_id` int(11) NOT NULL,
-  `veiculo_id` int(11) NOT NULL,
-  `usuario_id` int(11) NOT NULL,
-  `disponivel` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'N'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `funcionarios`
---
-
-CREATE TABLE `funcionarios` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `cpf` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `usuario_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci DELAY_KEY_WRITE=1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `usuario`
---
-
-CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
-  `cnpj` varchar(18) COLLATE utf8_unicode_ci NOT NULL,
-  `razao_social` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `senha` varchar(32) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `veiculos`
---
-
-CREATE TABLE `veiculos` (
-  `id` int(11) NOT NULL,
-  `placa` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `modelo` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `marca` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `autonomia` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `usuario_id` int(11) NOT NULL,
-  `disponivel` char(1) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'S'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices para tabela `chamados`
---
-ALTER TABLE `chamados`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices para tabela `funcionarios`
---
-ALTER TABLE `funcionarios`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `CPJ é um campo unico` (`cpf`);
-
---
--- Índices para tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `CNPJ é um campo unico` (`cnpj`),
-  ADD UNIQUE KEY `Email é um campo unico` (`email`);
-
---
--- Índices para tabela `veiculos`
---
-ALTER TABLE `veiculos`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Placa é um campo unico` (`placa`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `chamados`
---
-ALTER TABLE `chamados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `funcionarios`
---
-ALTER TABLE `funcionarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `veiculos`
---
-ALTER TABLE `veiculos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+CREATE TABLE IF NOT EXISTS `echo`.`veiculos` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `placa` VARCHAR(45) NOT NULL,
+  `modelo` VARCHAR(45) NOT NULL,
+  `marca` VARCHAR(45) NOT NULL,
+  `autonomia` VARCHAR(45) NOT NULL,
+  `usuario_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `Placa é um campo unico` (`placa` ASC),
+  INDEX `fk_usuario_idx` (`usuario_id` ASC),
+  CONSTRAINT `fk_veiculos_usuario`
+    FOREIGN KEY (`usuario_id`)
+    REFERENCES `echo`.`usuarios` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;

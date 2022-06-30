@@ -50,8 +50,6 @@ class FuncionariosControllers extends \Controllers
             self::redirect("/$this->nameController/index");
         }
         return self::view("/Auth/$this->nameController/novo",["nameController"=>$this->nameController]);
-
-
     }
 
     public function alterar($id)

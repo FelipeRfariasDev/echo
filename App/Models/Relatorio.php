@@ -90,7 +90,7 @@ class Relatorio extends Connection
         $sql = "SELECT chamados.km_rodado,veiculos.placa,veiculos.marca,veiculos.modelo
             FROM chamados
             JOIN veiculos ON (veiculos.id=chamados.veiculo_id) 
-         WHERE chamados.`usuario_id`=$this->login_id and chamados.data >= '$data_inicio' AND chamados.data <= '$data_fim' and chamados.disponivel='S'";
+         WHERE chamados.`usuario_id`=$this->login_id and chamados.data >= '$data_inicio' AND chamados.data <= '$data_fim'";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute();

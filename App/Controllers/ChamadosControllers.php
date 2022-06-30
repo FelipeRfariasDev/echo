@@ -33,18 +33,9 @@ class ChamadosControllers extends \Controllers
             }
         }
 
-        $modelChamado = new Chamado();
-        $modelFuncionario = new Funcionario();
-        $modelVeiculo = new Veiculo();
-
-        return self::view(
-            "Auth/$this->nameController/index",
-            [
-                "getData"=>$modelChamado->index(),
-                "getVeiculos"=>$modelVeiculo->index(),
-                "getFuncionarios"=>$modelFuncionario->index(),
-                "nameController"=>$this->nameController
-            ]);
+        $model = new Chamado();
+        $getData = $model->index($km_rodado,$funcionario_id,$veiculo_id);
+        return self::view("Auth/$this->nameController/index",["getData"=>$getData,"nameController"=>$this->nameController]);
     }
 
     public function novo()
@@ -71,21 +62,34 @@ class ChamadosControllers extends \Controllers
             ]);
     }
 
-    public function alterar_disponivel($chamados_id,$veiculo_id)
+    public function alterar($id)
     {
-        $model = new Chamado();
-        if($model->alterar_disponivel($chamados_id,$veiculo_id)){
-            $_SESSION["msgAlteradoSucesso"]=true;
-            self::redirect("/$this->nameController/index");
+        if ($_POST) {
+            $model = new Chamado();
+            $update = $model->update($id);
+            if($update["msg_success"]==true){
+                $_SESSION["msgAlteradoSucesso"]=true;
+                self::redirect("/$this->nameController/index");
+            }else{
+                $_SESSION["msgAlteradoErro"]=$update["msg_erros"];
+                self::redirect("/$this->nameController/index");
+            }
         }
+        $model = new Chamado();
+        $getById = $model->getById($id);
+        return self::view("Auth/$this->nameController/alterar",["getById"=>$getById,"nameController"=>$this->nameController]);
     }
 
-    public function alterar_indisponivel($chamados_id,$veiculo_id)
+    public function excluir($id=null)
     {
-        $model = new Chamado();
-        if($model->alterar_indisponivel($chamados_id,$veiculo_id)){
-            $_SESSION["msgAlteradoSucesso"]=true;
-            self::redirect("/$this->nameController/index");
+        $model = new Veiculo();
+        $delete = $model->delete($id);
+
+        if($delete["msg_success"]==true){
+            $_SESSION["msgRemovidoSucesso"]=true;
+        }else{
+            $_SESSION["msgRemovidoErro"]=$delete["msg_erros"];
         }
+        self::redirect("/$this->nameController/index");
     }
 }

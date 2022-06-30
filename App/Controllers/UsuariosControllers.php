@@ -23,18 +23,14 @@ class UsuariosControllers extends \Controllers
             if($_POST["tiporequisicao"]=="login"){
                 $usuario = new Usuario();
                 $data = $usuario->login();
-
                 if($data["msg_success"]==true){
                     session_id($data['id']);
                     $_SESSION["usuario"]=$data["getUsuarios"];
-
                     $_SESSION["msgLoginSucesso"]="Login Realizado com Sucesso!";
-
                     self::redirect("/Site/principal/");
                 }else{
                     $_SESSION["msgLoginErro"]=true;
                 }
-
             }
         }
         return self::view("login");

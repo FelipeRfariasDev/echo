@@ -38,7 +38,6 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Autonomia</th>
-                <th>Disponível</th>
                 <th></th>
             </tr>
             <?php
@@ -48,7 +47,6 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                     <td><?php echo $linha["marca"]; ?></td>
                     <td><?php echo $linha["modelo"]; ?></td>
                     <td><?php echo $linha["autonomia"]; ?></td>
-                    <td><?php echo $linha["disponivel"]; ?></td>
                     <td>
                         <div class="ud">
                         <a href='/<?php echo $vars["nameController"];?>/alterar/<?php echo $linha["id"]; ?>'><img style="width: 56px; height: 56px;" src="/public/assets/svg/edit.svg" alt=""></a>

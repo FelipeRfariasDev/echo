@@ -49,15 +49,6 @@ class Veiculo extends Connection
         }
     }
 
-    public function getVeiculoDisponivel($veiculo_id){
-        $conn = $this->connect();
-        $sql = "SELECT count(id) as qtd FROM veiculos where id=$veiculo_id and disponivel='S'";
-        echo $sql;
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
     public function novo()
     {
         if ($_POST) {
@@ -111,11 +102,9 @@ class Veiculo extends Connection
                 $modelo = $_POST["modelo"];
                 $marca = $_POST["marca"];
                 $autonomia = $_POST["autonomia"];
-                $disponivel = $_POST["disponivel"];
 
                 $conn = $this->connect();
-                $sql = "UPDATE $this->nome_table SET disponivel='$disponivel',placa = '$placa',modelo = '$modelo',marca = '$marca',autonomia='$autonomia',usuario_id=$this->login_id WHERE (`id` = $id)";
-                echo $sql;
+                $sql = "UPDATE $this->nome_table SET placa = '$placa',modelo = '$modelo',marca = '$marca',autonomia='$autonomia',usuario_id=$this->login_id WHERE (`id` = $id)";
                 $stmt = $conn->prepare($sql);
                 $sucesso = $stmt->execute();
                 if (!$sucesso) {
