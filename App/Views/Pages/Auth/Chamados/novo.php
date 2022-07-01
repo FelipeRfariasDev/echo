@@ -14,6 +14,7 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                 <label for="">Km rodado</label>
                 <input autocomplete="off" name="km_rodado" type="text" placeholder="Digite Km rodado" required>
 
+
                 <label for="">Funcionários</label>
                 <select name="funcionario_id" required style="width: 25vw!important;
     height: 6vh!important;
@@ -28,8 +29,8 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
                         <option value="<?php echo $linha["id"];?>"><?php echo $linha["nome"];?> / <?php echo $linha["cpf"];?></option>
                     <?php endforeach; ?>
                 </select>
-            </div>
-            <div class="input-row">
+
+
                 <label for="">Veículo</label>
                 <select name="veiculo_id" required style="width: 25vw!important;
     height: 6vh!important;

@@ -33,7 +33,7 @@ class Chamado extends Connection
                 WHERE chamados.`usuario_id`=$this->login_id";
 
         if(!empty($km_rodado)){
-            $sql .=" AND nome='$km_rodado'";
+            $sql .=" AND km_rodado='$km_rodado'";
         }
         if(!empty($funcionario_id)){
             $sql .=" AND funcionario_id='$funcionario_id'";

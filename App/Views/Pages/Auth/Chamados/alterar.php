@@ -27,8 +27,6 @@ include($_SERVER["DOCUMENT_ROOT"]."/App/Views/Pages/Auth/Element/nav-menu-autent
                         <option value="<?php echo $linha["id"];?>" <?php if($vars["getData"]["funcionario_id"]==$linha["id"]) echo "selected";?>><?php echo $linha["nome"];?> / <?php echo $linha["cpf"];?></option>
                     <?php endforeach; ?>
                 </select>
-            </div>
-            <div class="input-row">
                 <label for="">Veículo</label>
                 <select name="veiculo_id" required style="width: 25vw!important;
     height: 6vh!important;

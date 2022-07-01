@@ -25,7 +25,7 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
     <table>
         <tr>
             <th>Veículo</th>
-            <th>Co2</th>
+            <th>CO2</th>
         </tr>
         <?php
         foreach ($vars["getData"] as $linha) : ?>
