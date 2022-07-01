@@ -4,7 +4,7 @@
         <div class="nav-menu" style="width: 900px;
     margin-top: -5px;">
             <div class="logo">
-                <a href="/Site/principal/"><img src="/public/assets/svg/Logo.svg" style="width: 150px;margin-left: 100%;" alt="Echo"></a>
+                <a href="/Site/principal/"><img src="/public/assets/svg/Logo.svg" style="width: 150px;margin-left: 70%;" alt="Echo"></a>
             </div>
             <div style="margin-left: -200px;"></div>
             <?php
