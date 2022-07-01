@@ -14,9 +14,17 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
             <div class="input-row">
                 <label for="">Km rodado</label>
                 <input autocomplete="off" name="km_rodado" type="text" placeholder="Digite Km rodado para pesquisar na tabela">
-
+            </div>
+            <div class="input-row">
                 <label for="">Funcionários</label>
-                <select name="funcionario_id">
+                <select name="funcionario_id" style="width: 25vw!important;
+    height: 6vh!important;
+    margin: 1vw!important;
+    border-radius: 10px!important;
+    border-color: #6D995D!important;
+    font-size: 20px!important;
+    text-align: center!important;
+    color: #405936!important">
                     <option value="">Seleciona um Funcionário para pesquisar na tabela</option>
                     <?php foreach ($vars["getFuncionarios"] as $linha) : ?>
                         <option value="<?php echo $linha["id"];?>"><?php echo $linha["nome"];?> / <?php echo $linha["cpf"];?></option>
@@ -25,7 +33,14 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
             </div>
             <div class="input-row">
                 <label for="">Veículo</label>
-                <select name="veiculo_id">
+                <select name="veiculo_id" style="width: 25vw!important;
+    height: 6vh!important;
+    margin: 1vw!important;
+    border-radius: 10px!important;
+    border-color: #6D995D!important;
+    font-size: 20px!important;
+    text-align: center!important;
+    color: #405936!important">
                     <option value="">Seleciona um Veículo para pesquisar na tabela</option>
                     <?php foreach ($vars["getVeiculos"] as $linha) : ?>
                         <option value="<?php echo $linha["id"];?>"><?php echo $linha["placa"];?> / <?php echo $linha["marca"];?> / <?php echo $linha["modelo"];?></option>
@@ -37,11 +52,11 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
     </form>
 
     <?php if (!empty($vars["getData"])) { ?>
-        <table>
+        <table style="width: 100%;">
             <tr>
                 <th>Km rodado</th>
                 <th>Data</th>
-                <th>Co2</th>
+                <th>CO2</th>
                 <th>Funcionário</th>
                 <th>Veiculo</th>
                 <th></th>

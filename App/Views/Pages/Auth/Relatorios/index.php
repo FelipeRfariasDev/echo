@@ -9,19 +9,30 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
     <div class="inputs">
         <div class="input-row">
             <label for="">Tipo</label>
-            <select name="tipo_relatorio" required>
+            <select name="tipo_relatorio" required style="width: 25vw!important;
+    height: 6vh!important;
+    margin: 1vw!important;
+    border-radius: 10px!important;
+    border-color: #6D995D!important;
+    font-size: 20px!important;
+    text-align: center!important;
+    color: #405936!important">
                 <option value="">Selecione</option>
-                <option value="co2veiculo">Co2 Veiculo</option>
-                <option value="consumo_veiculo_funcionario">Consumo de Veiculo por Funcionário</option>
+                <option value="co2veiculo">CO2 Veículo</option>
+                <option value="consumo_veiculo_funcionario">Consumo de Veículo por Funcionário</option>
                 <option value="consumo_km_funcionario">Consumo KM por Funcionário</option>
-                <option value="km_rodado_veiculo">KM Rodado Veiculo</option>
+                <option value="km_rodado_veiculo">KM Rodado Veículo</option>
             </select>
+        </div>
             <?php
             $data_inicio = new DateTime("-31 days");
             $data_inicio_formatada =  $data_inicio->format('Y-m-d');
             ?>
+        <div class="input-row">
             <label for="">Data Inicio</label>
             <input autocomplete="off" name="data_inicio" value="<?php echo $data_inicio_formatada ?>" type="date" required>
+        </div>
+        <div class="input-row">
             <label for="">Data Fim</label>
             <?php
             $data_fim = new DateTime();

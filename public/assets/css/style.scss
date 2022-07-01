@@ -1,8 +1,15 @@
-*, *::after, *::before{
+*, *::after, *::before {
     margin: 0;
     padding: 0;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     font-family: 'Signika',sans-serif;
+    border-bottom-left-radius: 40px;
+    border-top-left-radius: 40px;
+    border-radius: 10px!important;
+}
+*, *::after, *::before {
+    border-radius: 10px!important;
 }
 
 @import "partials/colors";
@@ -12,11 +19,13 @@ body{
     width: 100%;
     height: 100vh;
     background-color: $white;
+    border-radius: 10px!important;
 }
 
 img, svg{
     display: block;
     width: 100%;
+    border-radius: 10px!important;
 }
 
 a{
@@ -32,14 +41,17 @@ p{
     font-size: 16px;
     letter-spacing: 1px;
     line-height: 140%;
+    border-radius: 10px!important;
 }
 
 header{
     width: 100%;
     padding-top: 16px;
+    border-radius: 10px!important;
 }
 
 .navbar{
+    border-radius: 10px!important;
     max-width: 1440px;
     margin: 0 auto;
     display: flex;
@@ -57,6 +69,21 @@ header{
     }
 }
 
+.select{
+    width: 25vw!important;
+    height: 6vh!important;
+    margin: 1vw!important;
+    border-radius: 10px!important;
+    border-color: #6D995D!important;
+    font-size: 20px!important;
+    text-align: center!important;
+    color: #405936!important;
+}
+
+li{
+    border-radius: 10px!important;
+}
+
 input:focus{
     outline: none;
 }
@@ -70,7 +97,7 @@ img{
     justify-content: flex-start;
     align-items: center;
     z-index: 1;
-
+    border-radius: 10px!important;
     @include tabletS(){
         margin-right: -25px;
     }
@@ -82,7 +109,6 @@ img{
 
 .nav-list{
     height: 45px;
-    border-radius: 40px;
     border: 1px solid $green;
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -91,6 +117,7 @@ img{
     margin-left: 17vw;
     margin-right: 10vw;
     align-items: center;
+    border-radius: 10px!important;
     
 
     @include tablet(){
@@ -102,14 +129,17 @@ img{
         display: none;
     }
 
-    li:nth-child(1){
-        border-bottom-left-radius: 40px;
-        border-top-left-radius: 40px;
-    }   
+
   
 }
 
-
+L1{
+    border-bottom-left-radius: 40px;
+    border-top-left-radius: 40px;
+    border-radius: 10px!important;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
 
 .btnAcessar{
     display: flex;
@@ -123,6 +153,7 @@ img{
     font-size: 24px;
     color: $green;
     transition: .5s ease;
+    border-radius: 10px!important;
 
     @include smartphone(){
         display: none;
@@ -135,6 +166,7 @@ img{
 }
 
 .nav-link{
+    border-radius: 10px!important;
     opacity: 1;
     display: inline-block;
     padding: 12px 10px 13px 15px;
@@ -160,6 +192,7 @@ img{
 
 .burger{
     display: none;
+    border-radius: 10px!important;
 
     @include smartphone(){
         display: inline-block;
@@ -181,4 +214,13 @@ img{
 
 
 
-
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'Signika',sans-serif;
+    border-bottom-left-radius: 40px;
+    border-top-left-radius: 40px;
+    border-radius: 10px!important;
+}

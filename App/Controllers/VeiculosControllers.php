@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Funcionario;
 use App\Models\Veiculo;
 
 include ("Controller.php");
@@ -29,9 +30,12 @@ class VeiculosControllers extends \Controllers
             $marca = $_POST["marca"];
             $autonomia = $_POST["autonomia"];
         }
-        $model = new Veiculo();
-        $getData = $model->index($placa,$modelo,$marca,$autonomia);
-        return self::view("Auth/$this->nameController/index",["getData"=>$getData,"nameController"=>$this->nameController]);
+        $veiculos = new Veiculo();
+
+        return self::view("Auth/$this->nameController/index",[
+            "getData"=>$veiculos->index($placa,$modelo,$marca,$autonomia),
+            "nameController"=>$this->nameController
+        ]);
     }
 
     public function novo()
@@ -46,7 +50,15 @@ class VeiculosControllers extends \Controllers
             }
             self::redirect("/$this->nameController/index");
         }
-        return self::view("/Auth/$this->nameController/novo",["nameController"=>$this->nameController]);
+        $modelFuncionario = new Funcionario();
+        $modelVeiculo = new Veiculo();
+        return self::view("/Auth/$this->nameController/novo",
+            [
+                "getVeiculos"=>$modelVeiculo->index(),
+                "getFuncionarios"=>$modelFuncionario->index(),
+                "nameController"=>$this->nameController
+            ]
+        );
     }
 
     public function alterar($id)

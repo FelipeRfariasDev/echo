@@ -85,7 +85,7 @@ class Chamado extends Connection
     public function getById($id)
     {
         $conn = $this->connect();
-        $sql = "select * from $this->nome_table where id=$id";
+        $sql = "select * from chamados where id=$id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch();

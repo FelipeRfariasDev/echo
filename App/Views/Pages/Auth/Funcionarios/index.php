@@ -14,7 +14,8 @@ include($_SERVER["DOCUMENT_ROOT"] . "/App/Views/Pages/Auth/Element/nav-menu-aute
             <div class="input-row">
                 <label for="">Nome</label>
                 <input autocomplete="off" name="nome" type="text" placeholder="Digite uma Nome para pesquisar na tabela">
-
+            </div>
+            <div class="input-row">
                 <label for="">CPF</label>
                 <input autocomplete="off" name="cpf" type="text" placeholder="Digite uma Cpf para pesquisar na tabela">
             </div>

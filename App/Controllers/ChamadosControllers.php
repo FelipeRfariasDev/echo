@@ -33,9 +33,18 @@ class ChamadosControllers extends \Controllers
             }
         }
 
-        $model = new Chamado();
-        $getData = $model->index($km_rodado,$funcionario_id,$veiculo_id);
-        return self::view("Auth/$this->nameController/index",["getData"=>$getData,"nameController"=>$this->nameController]);
+        $modelChamado = new Chamado();
+        $modelFuncionario = new Funcionario();
+        $modelVeiculo = new Veiculo();
+
+        return self::view(
+            "Auth/$this->nameController/index",
+            [
+                "getData"=>$modelChamado->index($km_rodado,$funcionario_id,$veiculo_id),
+                "getVeiculos"=>$modelVeiculo->index(),
+                "getFuncionarios"=>$modelFuncionario->index(),
+                "nameController"=>$this->nameController
+            ]);
     }
 
     public function novo()
@@ -51,10 +60,11 @@ class ChamadosControllers extends \Controllers
             }
             self::redirect("/$this->nameController/index");
         }
-        $modelVeiculo = new Veiculo();
         $modelFuncionario = new Funcionario();
+        $modelVeiculo = new Veiculo();
 
-        return self::view("/Auth/$this->nameController/novo",
+        return self::view(
+            "Auth/$this->nameController/novo",
             [
                 "getVeiculos"=>$modelVeiculo->index(),
                 "getFuncionarios"=>$modelFuncionario->index(),
@@ -75,9 +85,18 @@ class ChamadosControllers extends \Controllers
                 self::redirect("/$this->nameController/index");
             }
         }
-        $model = new Chamado();
-        $getById = $model->getById($id);
-        return self::view("Auth/$this->nameController/alterar",["getById"=>$getById,"nameController"=>$this->nameController]);
+        $modelChamado = new Chamado();
+        $modelFuncionario = new Funcionario();
+        $modelVeiculo = new Veiculo();
+
+        return self::view(
+            "Auth/$this->nameController/alterar",
+            [
+                "getData"=>$modelChamado->getById($id),
+                "getVeiculos"=>$modelVeiculo->index(),
+                "getFuncionarios"=>$modelFuncionario->index(),
+                "nameController"=>$this->nameController
+            ]);
     }
 
     public function excluir($id=null)
