@@ -6,8 +6,6 @@ use App\Models\Funcionario;
 
 include ("Controller.php");
 
-session_start();
-
 class FuncionariosControllers extends \Controllers
 {
     private $name_controller;

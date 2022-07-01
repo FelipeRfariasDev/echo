@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-session_start();
-
 class SiteControllers
 {
     public function home()

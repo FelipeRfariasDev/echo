@@ -7,8 +7,6 @@ use App\Models\Veiculo;
 
 include ("Controller.php");
 
-session_start();
-
 class VeiculosControllers extends \Controllers
 {
     private $name_controller;

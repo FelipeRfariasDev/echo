@@ -1,4 +1,5 @@
 <?php
+include ("Auth.php");
 
 abstract class Controllers {
     protected final function view(string $_name, array $vars = []) {

@@ -6,8 +6,6 @@ use App\Models\Usuario;
 
 include ("Controller.php");
 
-session_start();
-
 class UsuariosControllers extends \Controllers
 {
     private $name_controller;

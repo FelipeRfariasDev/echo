@@ -4,8 +4,6 @@ namespace App\Controllers;
 
 use App\Models\Relatorio;
 
-session_start();
-
 include ("Controller.php");
 
 class RelatoriosControllers extends \Controllers
