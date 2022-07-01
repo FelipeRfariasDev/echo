@@ -5,6 +5,8 @@
 
 ![alt text](https://github.com/FelipeRfariasDev/echo/blob/main/Database/EER/diagrama.PNG?raw=true)
 
+<h4><a href="https://github.com/FelipeRfariasDev/echo/blob/main/video/video.webm?raw=true">Link Vídeo</a></h4>
+
 
 git clone https://github.com/LuanODias/Echo-mvc
 
